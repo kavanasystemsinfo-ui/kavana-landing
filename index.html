@@ -90,6 +90,15 @@
     .portrait .hint { font-size: 0.78rem; line-height: 1.5; }
     .portrait-caption { margin-top: 14px; text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.5px; color: var(--primary); }
 
+    /* QUÉ CONSTRUYE — bloque recruiter */
+    .what-block { padding: 60px 0; background: #0d0d0d; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .what-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .what-item { background: var(--panel); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 6px; transition: border-color .2s; }
+    .what-item:hover { border-color: var(--border); }
+    .what-icon { font-size: 1.6rem; }
+    .what-label { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1rem; color: #fff; }
+    .what-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
     /* SECTIONS */
     section { padding: 84px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
     .section-label { display: inline-block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--primary); margin-bottom: 14px; }
@@ -152,6 +161,9 @@
       .nav .links { display: none; }
       .statement h2, .close h2 { font-size: 1.6rem; }
       .section-title { font-size: 1.6rem; }
+      .what-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .about .portrait img { max-width: 320px; margin: 0 auto; display: block; }
+      .about .portrait { background: transparent !important; border: none !important; }
     }
   </style>
 </head>
@@ -191,6 +203,44 @@
       </div>
     </div>
   </header>
+
+  <!-- QUÉ CONSTRUYE — bloque clave para recruiter -->
+  <div class="what-block">
+    <div class="container">
+      <div class="what-grid">
+        <div class="what-item">
+          <span class="what-icon">🛠️</span>
+          <span class="what-label">Product Engineer</span>
+          <span class="what-desc">Diseño y construyo productos SaaS desde el problema hasta el deploy</span>
+        </div>
+        <div class="what-item">
+          <span class="what-icon">🏭</span>
+          <span class="what-label">Software Industrial</span>
+          <span class="what-desc">MES, trazabilidad, control de planta nacidos de la experiencia real en fábrica</span>
+        </div>
+        <div class="what-item">
+          <span class="what-icon">🧩</span>
+          <span class="what-label">SaaS Multi-tenant</span>
+          <span class="what-desc">Arquitectura con aislamiento por RLS, cada cliente ve solo sus datos</span>
+        </div>
+        <div class="what-item">
+          <span class="what-icon">🤖</span>
+          <span class="what-label">IA Aplicada</span>
+          <span class="what-desc">LLMs, RAG, asistentes contextuales integrados en productos reales</span>
+        </div>
+        <div class="what-item">
+          <span class="what-icon">📡</span>
+          <span class="what-label">Offline-First</span>
+          <span class="what-desc">Sistemas que funcionan sin conexión y sincronizan al recuperar red</span>
+        </div>
+        <div class="what-item">
+          <span class="what-icon">📐</span>
+          <span class="what-label">TDD + ADRs</span>
+          <span class="what-desc">Tests antes del código, decisiones documentadas con alternativas evaluadas</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- SECCIÓN 2: ¿POR QUÉ EXISTE KAVANA? -->
   <section id="historia">

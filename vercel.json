@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/manufacturing", "destination": "/manufacturing/index.html" },
+    { "source": "/warehouse", "destination": "/warehouse/index.html" },
+    { "source": "/routeai", "destination": "/routeai/index.html" }
+  ]
+}
