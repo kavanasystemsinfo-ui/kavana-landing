@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kavana Route AI: Optimización Inteligente de Rutas de Reparto</title>
+  <meta name="description" content="Plataforma SaaS de optimización inteligente de rutas de reparto. OCR de albaranes, optimización algorítmica 2-opt, firma digital de entrega (POD) y Torre de Control." />
+  <link rel="canonical" href="https://www.kavanasystems.com/routeai/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0a0a0f;color:#f0f0f5;line-height:1.7;-webkit-font-smoothing:antialiased}
+    :root{--bg:#0a0a0f;--bg2:#111118;--card:#16161f;--border:#232333;--text2:#9090a8;--muted:#606078;--gold:#f8cd00;--gold2:#d4ac00;--gold-s:rgba(248,205,0,0.12);--green:#22c55e;--amber:#f59e0b;--radius:12px;--rsm:8px;--mono:'JetBrains Mono',monospace}
+    .w{max-width:900px;margin:0 auto;padding:0 2rem}
+    section{padding:5rem 0}
+    .sl{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--gold);text-transform:uppercase;letter-spacing:.15em;margin-bottom:.75rem;display:block}
+    .st{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:1rem}
+    .ss{font-size:1.1rem;color:var(--text2);max-width:680px;line-height:1.7}
+    .badge{display:inline-flex;align-items:center;gap:6px;background:var(--gold-s);border:1px solid var(--border);color:var(--gold);padding:6px 14px;border-radius:100px;font-weight:600;font-size:.8rem;font-family:var(--mono)}
+    .badge::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--amber);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    nav{position:fixed;top:60px;left:0;right:0;z-index:100;background:rgba(10,10,15,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .nb{display:flex;align-items:center;gap:10px;text-decoration:none;color:#f0f0f5}
+    .nl{width:32px;height:32px;border-radius:8px;object-fit:contain}
+    .nb span{font-weight:700;font-size:16px;letter-spacing:-.02em}
+    .nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none}
+    .nav-links a{color:var(--text2);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+    .nav-links a:hover{color:var(--gold)}
+    .ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .ham span{width:22px;height:2px;background:#f0f0f5;border-radius:2px;transition:.3s}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:all .3s}
+    .card:hover{border-color:#333350}
+    .card h3{font-size:1.1rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+    .cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:2rem}
+    .ic{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rsm);padding:1.25rem;margin:1rem 0}
+    .ic h4{font-size:.95rem;font-weight:700;margin-bottom:.5rem;color:var(--gold)}
+    .ic p{font-size:.9rem;color:var(--text2);margin:0}
+    .tc{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
+    .tc .card{height:100%}
+    .sg{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.5rem}
+    .stg{background:var(--gold-s);border:1px solid var(--border);color:var(--gold);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:600;font-family:var(--mono)}
+    .cta-s{padding:4rem 0;text-align:center}
+    .cta-s h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin-bottom:1rem}
+    .cta-s p{color:var(--text2);margin-bottom:1.5rem;max-width:500px;margin-left:auto;margin-right:auto}
+    .ca{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+    .b1{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#0a0a0f;padding:14px 28px;border-radius:var(--rsm);text-decoration:none;font-weight:700;font-size:15px;transition:all .2s;border:none;cursor:pointer}
+    .b1:hover{background:var(--gold2);transform:translateY(-1px)}
+    .b2{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#f0f0f5;padding:14px 28px;border-radius:var(--rsm);text-decoration:none;font-weight:600;font-size:15px;border:1px solid var(--border);transition:all .2s}
+    .b2:hover{border-color:var(--gold);background:var(--card)}
+    .fg{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
+    .fi{padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+    .fi h3{font-size:1rem;font-weight:700;margin-bottom:.75rem;color:var(--gold)}
+    .fi p{font-size:.9rem;color:var(--text2);line-height:1.6}
+    .ficon{font-size:1.5rem;margin-bottom:.75rem;display:block}
+    .mg{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin:2rem 0}
+    .mc{text-align:center;padding:2rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+    .mv{font-size:2.5rem;font-weight:900;color:var(--gold);letter-spacing:-.03em}
+    .ml{font-size:.8rem;color:var(--muted);margin-top:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+    .fs{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+    .fstep{display:flex;align-items:flex-start;gap:1.25rem;padding:1.25rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+    .fsn{width:36px;height:36px;border-radius:50%;background:var(--gold);color:#0a0a0f;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+    .fsc h4{font-size:.95rem;font-weight:700;margin-bottom:.25rem}
+    .fsc p{font-size:.85rem;color:var(--text2);margin:0}
+    .prose{font-size:1.05rem;color:var(--text2);line-height:1.8;max-width:720px}
+    .prose p{margin-bottom:1.25rem}
+    .prose strong{color:#f0f0f5}
+    .prose a{color:var(--gold);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+    .prose a:hover{border-color:var(--gold)}
+    footer{padding:2rem 0;background:var(--bg2);border-top:1px solid var(--border)}
+    .fc{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.85rem;color:var(--muted)}
+    .flogo{width:24px;height:24px;border-radius:4px;object-fit:contain;vertical-align:middle;margin-right:6px}
+    .fl{display:flex;gap:1.5rem}
+    .fl a{color:var(--muted);text-decoration:none;transition:color .2s}
+    .fl a:hover{color:var(--gold)}
+    @media(max-width:1024px){.tc{grid-template-columns:1fr}.fg{grid-template-columns:1fr}.mg{grid-template-columns:repeat(2,1fr)}.nav-links{display:none}.ham{display:flex}}
+    @media(max-width:640px){.mg{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <!-- Status Banner -->
+  <div style="background:var(--bg2);border-bottom:1px solid var(--border);padding:1rem 0">
+    <div class="w" style="display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;font-size:.9rem;color:var(--text2)">
+      <span class="badge">Portfolio · Full-stack · Open Source</span>
+      <div style="display:flex;gap:1rem">
+        <a href="https://www.linkedin.com/in/kavanasystems/" target="_blank" style="color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500">💼 LinkedIn</a>
+        <a href="mailto:kavanasystems.info@gmail.com" style="color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500">✉️ Email</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#inicio" class="nb"><img src="logo.png?v=2" alt="Kavana" class="nl"><span>Kavana Route AI</span></a>
+    <ul class="nav-links">
+      <li><a href="#problema">Origen</a></li>
+      <li><a href="#tech">Capacidades</a></li>
+      <li><a href="#stack">Decisiones</a></li>
+      <li><a href="#demo">Demo</a></li>
+    </ul>
+    <button class="ham" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+
+  <!-- Hero -->
+  <header id="inicio" style="padding-top:180px;padding-bottom:3rem;position:relative;overflow:hidden">
+    <div style="position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(248,205,0,0.15) 0%,transparent 70%);pointer-events:none"></div>
+    <div class="w">
+      <div style="max-width:720px">
+        <p style="font-family:var(--mono);font-size:13px;font-weight:500;color:var(--gold);text-transform:uppercase;letter-spacing:.15em;margin-bottom:1rem;display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 16px 6px 12px">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--green)"></span> Proyecto destacado · Backend · Full Stack
+        </p>
+        <h1 style="font-size:clamp(2.25rem,5vw,3.5rem);font-weight:900;letter-spacing:-.04em;line-height:1.1;margin-bottom:1.5rem">KAVANA Route AI — Plataforma de reparto con OCR, optimización 2-opt y firma digital</h1>
+        <div class="prose" style="margin-top:1.5rem;font-size:1.15rem">
+          <p><strong>Proyecto portfolio de backend y full-stack.</strong> Construí un sistema completo de gestión de reparto con dos frontends (Torre de Control + App PWA), API REST, OCR, optimización de rutas, firma digital, métricas de coste real y documentación técnica (ADRs).</p>
+          <p>Tecnologías: Node + Express, React + Vite, PostgreSQL, Nominatim, Tesseract.js, 2-opt, GitHub Actions + Pages, Render. <a href="#stack" style="color:var(--gold)">Ver arquitectura completa →</a></p>
+        </div>
+        <div class="ca" style="margin-top:2rem;justify-content:flex-start">
+          <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI" target="_blank" class="b1">📂 Código en GitHub</a>
+          <a href="#tech" class="b2">🔧 Decisiones técnicas</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Metrics -->
+  <section style="padding-top:0"><div class="w"><div class="mg">
+    <div class="mc"><div class="mv">40+</div><div class="ml">Tests automatizados</div></div>
+    <div class="mc"><div class="mv">3</div><div class="ml">Workflows CI/CD</div></div>
+    <div class="mc"><div class="mv">2</div><div class="ml">Frontends activos</div></div>
+    <div class="mc"><div class="mv">2-opt</div><div class="ml">Algoritmo local</div></div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:1.5rem">
+    <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/001-reemplazo-ia-por-2opt.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📋 ADR: IA → 2-opt</a>
+    <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/002-geocodificacion-nominatim-fallbacks.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">🗺️ ADR: Geocoding</a>
+    <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/005-despliegue-github-pages-render.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">🚀 ADR: Deploy</a>
+    <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/DECISIONS.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📐 Decisiones técnicas</a>
+  </div>
+  </div></section>
+
+  <!-- Problema -->
+  <section id="problema" style="background:var(--bg2)">
+    <div class="w">
+      <span class="sl">El origen</span>
+      <h2 class="st">Por qué construí esto</h2>
+      <div class="prose">
+        <p>Trabajé en un entorno donde los repartidores llegaban cada mañana a una pila de albaranes en papel. Tenían que ordenarlos manualmente, decidir por dónde empezar, y al final del día devolver los papeles firmados — que a menudo se perdían. La oficina no sabía qué se había entregado hasta que el repartidor volvía.</p>
+        <p>Esa desconexión entre el repartidor y la oficina me pareció un problema técnicamente interesante de resolver: ¿cómo digitalizar ese flujo con herramientas accesibles, sin infraestructura cara, y que además demostrara criterio de ingeniería?</p>
+        <p><strong>Kavana Route AI es mi respuesta.</strong> Un MVP que cubre el ciclo completo: OCR de albaranes → optimización de ruta → firma digital → Torre de Control con métricas de coste real.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lo que demuestra -->
+  <section id="tech" style="background:var(--bg2)">
+    <div class="w">
+      <span class="sl">Lo que demuestra</span>
+      <h2 class="st">Capacidades técnicas visibles en este proyecto</h2>
+      <div class="fg">
+        <div class="fi"><span class="ficon">🏗️</span><h3>Arquitectura backend real</h3><p>API REST con Express, 20+ endpoints, middlewares JWT, carga de archivos, generación de PDF, OCR, geocodificación. Separación clara de responsabilidades en servicios.</p></div>
+        <div class="fi"><span class="ficon">🗄️</span><h3>Base de datos dual</h3><p>PostgreSQL en producción (Neon) + JSON file en desarrollo. Misma interfaz de queries, dos implementaciones. Sin cambiar código de negocio al cambiar de BD.</p></div>
+        <div class="fi"><span class="ficon">🧮</span><h3>Algoritmo 2-opt propio</h3><p>Implementé el algoritmo de optimización de rutas desde cero. Vecino más cercano + 2-opt. Mejor que IA gratuita, sin coste, <1ms. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/001-reemplazo-ia-por-2opt.md" target="_blank" style="color:var(--gold)">Decisión documentada</a>.</p></div>
+        <div class="fi"><span class="ficon">🔍</span><h3>Geocoding con fallbacks + validación</h3><p>Nominatim gratuito pero impreciso. 8 formatos de query por dirección + bounding box de Valencia. ~80% acierto. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/002-geocodificacion-nominatim-fallbacks.md" target="_blank" style="color:var(--gold)">ADR →</a></p></div>
+        <div class="fi"><span class="ficon">📸</span><h3>OCR con Tesseract.js + pdftotext</h3><p>Escanea imágenes (Tesseract), PDFs (pdftotext) y CSVs. Extrae direcciones y las limpia semánticamente para geocodificación.</p></div>
+        <div class="fi"><span class="ficon">🔐</span><h3>Auth JWT + RBAC</h3><p>Dos roles (office, driver) con endpoints protegidos. Login por PIN, token 8h, crypto nativo.</p></div>
+        <div class="fi"><span class="ficon">📱</span><h3>PWA + Capacitor</h3><p>App del repartidor como Progressive Web App. Offline-first. Instalable sin app store.</p></div>
+        <div class="fi"><span class="ficon">📋</span><h3>5 ADRs documentados</h3><p>Cada decisión clave documentada con contexto, alternativas y consecuencias. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/tree/main/docs/adr" target="_blank" style="color:var(--gold)">Ver ADRs →</a></p></div>
+        <div class="fi"><span class="ficon">🧪</span><h3>40+ tests</h3><p>Tests con node:test (sin framework). Pruebas de API, base de datos, geocoding. CI en GitHub Actions.</p></div>
+        <div class="fi"><span class="ficon">🚀</span><h3>CI/CD real en dos plataformas</h3><p>GitHub Actions build frontends → GitHub Pages. Backend en Render. Push a main = deploy automático.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Decisiones técnicas -->
+  <section id="stack" style="background:var(--bg2)">
+    <div class="w">
+      <span class="sl">Decisiones técnicas</span>
+      <h2 class="st">Criterio aplicado, no solo código</h2>
+      <div class="prose">
+        <p>Más allá de las tecnologías, aquí hay decisiones de arquitectura que responden a restricciones reales: coste cero para MVP, disponibilidad sin conexión, simplicidad operativa.</p>
+      </div>
+      <div class="fg">
+        <div class="fi"><h3>🧮 2-opt en vez de IA para rutas</h3><p>La IA parecía la opción obvia, pero los modelos gratuitos daban resultados inconsistentes y tardaban 30s. El algoritmo 2-opt es determinista, milisegundos, 0€ de coste y no necesita internet. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/001-reemplazo-ia-por-2opt.md" target="_blank" style="color:var(--gold)">ADR →</a></p></div>
+        <div class="fi"><h3>🗺️ Nominatim con validación geográfica</h3><p>Geocodificar direciones españolas gratis no es trivial. Implementé 8 formatos de query por dirección + bounding box de Valencia para filtrar resultados de otras ciudades. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/002-geocodificacion-nominatim-fallbacks.md" target="_blank" style="color:var(--gold)">ADR →</a></p></div>
+        <div class="fi"><h3>🗄️ BD dual: PostgreSQL y JSON</h3><p>El sistema funciona con PostgreSQL en producción o con un archivo JSON en desarrollo — sin cambiar una línea de código de negocio. Misma interfaz de queries, dos implementaciones. Ideal para desarrollar sin infraestructura.</p></div>
+        <div class="fi"><h3>📐 5 ADRs documentados</h3><p>Cada decisión importante tiene su Architecture Decision Record: contexto, alternativas evaluadas, consecuencias. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/tree/main/docs/adr" target="_blank" style="color:var(--gold)">Ver ADRs →</a></p></div>
+        <div class="fi"><h3>🚀 CI/CD en dos plataformas</h3><p>GitHub Actions build los frontends y los despliega a GitHub Pages. El backend Node vive en Render. Despliegue automático con cada push a main. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/005-despliegue-github-pages-render.md" target="_blank" style="color:var(--gold)">ADR →</a></p></div>
+        <div class="fi"><h3>📱 PWA + APK nativo</h3><p>La app del repartidor funciona como Progressive Web App (instalable sin Play Store) y como APK generado con Capacitor para Android. Offline-first: funciona sin conexión.</p></div>
+      </div>
+      <div style="text-align:center;margin-top:2rem">
+        <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/DECISIONS.md" target="_blank" class="b2">📐 Ver todas las decisiones técnicas</a>
+      </div>
+    </div>
+  </section>
+  <section id="tech-stack">
+    <div class="w">
+      <span class="sl">Stack tecnológico</span>
+      <h2 class="st">Arquitectura real, no mockups</h2>
+      <div class="tc">
+        <div class="card"><h3>🔙 Backend</h3><div class="sg"><span class="stg">Node 20+</span><span class="stg">Express 4</span><span class="stg">pg</span><span class="stg">JSON</span><span class="stg">JWT</span><span class="stg">PDFKit</span><span class="stg">pdftotext</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>API REST 20+ endpoints</li><li>BD dual: PostgreSQL (Neon) + JSON fallback</li><li>Geocoding Nominatim + validación Valencia</li><li>Optimización 2-opt (0€, <1ms)</li></ul></div>
+        <div class="card"><h3>🎨 Frontend</h3><div class="sg"><span class="stg">React 18</span><span class="stg">Vite</span><span class="stg">Canvas</span><span class="stg">jsPDF</span><span class="stg">Capacitor</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>PWA + APK Android</li><li>Torre de Control desktop</li><li>Estilo oscuro Electric Gold</li></ul></div>
+      </div>
+      <div class="card" style="margin-top:2rem">
+        <h3>🏗️ Infraestructura</h3>
+        <div class="sg"><span class="stg">Render</span><span class="stg">Neon</span><span class="stg">GitHub Pages</span><span class="stg">Namecheap</span><span class="stg">GitHub Actions</span><span class="stg">Nominatim</span><span class="stg">Let's Encrypt</span></div>
+        <div style="margin-top:1rem;font-size:.85rem;color:var(--text2);border-top:1px solid var(--border);padding-top:1rem">
+          📚 <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/DECISIONS.md" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:600">Decisiones técnicas</a>
+          · <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/README.md" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:600">README completo</a>
+          · <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/tree/main/docs/adr" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:600">ADRs (5 documentos)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo -->
+  <section id="demo" style="background:var(--bg2)">
+    <div class="w">
+      <span class="sl">Demo en vivo</span>
+      <h2 class="st">Pruébalo ahora</h2>
+      <div class="tc" style="margin-top:2rem">
+        <div class="card" style="text-align:center">
+          <h3 style="justify-content:center;font-size:1.25rem">🏢 Torre de Control</h3>
+          <p style="color:var(--text2);font-size:.9rem;margin:1rem 0">Gestiona repartidores, envía rutas, sigue entregas.</p>
+          <div class="ic"><h4>PIN oficina: <code style="background:#0a0a0f;padding:4px 10px;border-radius:4px;font-size:1rem">0000</code></h4><p style="margin-top:.5rem">Accede desde cualquier navegador.</p></div>
+          <a href="https://www.routeai.kavanasystems.com/" target="_blank" class="b1" style="margin-top:1rem">Abrir Torre de Control →</a>
+        </div>
+        <div class="card" style="text-align:center">
+          <h3 style="justify-content:center;font-size:1.25rem">📱 App Repartidor</h3>
+          <p style="color:var(--text2);font-size:.9rem;margin:1rem 0">Escanea albaranes, entrega con firma.</p>
+          <div class="ic"><h4>PIN repartidor: <code style="background:#0a0a0f;padding:4px 10px;border-radius:4px;font-size:1rem">5855</code></h4></div>
+          <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1rem">
+            <a href="https://www.routeai.kavanasystems.com/app/" target="_blank" class="b1">Abrir App →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-s">
+    <div class="w">
+      <h2>¿Quieres ver más?</h2>
+      <p>Este es uno de los proyectos de mi portfolio. Si quieres ver el código, las decisiones técnicas documentadas, o simplemente conectar:</p>
+      <div class="ca">
+        <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI" target="_blank" class="b1">📂 Código + ADRs + Docs</a>
+        <a href="https://www.linkedin.com/in/kavanasystems/" target="_blank" class="b2">💼 LinkedIn</a>
+        <a href="https://www.kavanasystems.com" target="_blank" class="b2">🌐 Más proyectos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="w fc">
+      <div><img src="logo.png?v=2" alt="Kavana" class="flogo"><span>© 2026 KAVANA ROUTE AI · Jorge Adán</span></div>
+      <div class="fl">
+        <a href="https://www.kavanasystems.com">Kavana Systems</a>
+        <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/kavanasystems/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
