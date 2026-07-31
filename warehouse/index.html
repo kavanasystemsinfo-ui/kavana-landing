@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kavana Warehouse: WMS Multi-Tenant — Proyecto Portfolio Full-Stack</title>
+  <meta name="description" content="Proyecto portfolio de full-stack: sistema de gestión de almacenes (WMS) multi-tenant construido para resolver un problema real de una empresa de limpieza. React 19, Node.js + Express, PostgreSQL 16, Docker." />
+  <link rel="canonical" href="https://www.kavanasystems.com/warehouse/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0a0a0f;color:#f0f0f5;line-height:1.7;-webkit-font-smoothing:antialiased}
+    :root{--bg:#0a0a0f;--bg2:#111118;--card:#16161f;--border:#232333;--text2:#9090a8;--muted:#606078;--blue:#6dc7fe;--blue2:#5ab8f0;--blue-s:rgba(109,199,254,0.12);--green:#22c55e;--amber:#f59e0b;--radius:12px;--rsm:8px;--mono:'JetBrains Mono',monospace}
+    .w{max-width:900px;margin:0 auto;padding:0 2rem}
+    section{padding:5rem 0}
+    .sl{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--blue);text-transform:uppercase;letter-spacing:.15em;margin-bottom:.75rem;display:block}
+    .st{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:1rem}
+    .ss{font-size:1.1rem;color:var(--text2);max-width:680px;line-height:1.7}
+    .badge{display:inline-flex;align-items:center;gap:6px;background:var(--blue-s);border:1px solid var(--border);color:var(--blue);padding:6px 14px;border-radius:100px;font-weight:600;font-size:.8rem;font-family:var(--mono)}
+    .badge::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--amber);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    nav{position:fixed;top:60px;left:0;right:0;z-index:100;background:rgba(10,10,15,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .nb{display:flex;align-items:center;gap:10px;text-decoration:none;color:#f0f0f5}
+    .nl{width:32px;height:32px;border-radius:8px;object-fit:contain}
+    .nb span{font-weight:700;font-size:16px;letter-spacing:-.02em}
+    .nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none}
+    .nav-links a{color:var(--text2);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+    .nav-links a:hover{color:var(--blue)}
+    .ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .ham span{width:22px;height:2px;background:#f0f0f5;border-radius:2px;transition:.3s}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:all .3s}
+    .card:hover{border-color:#333350}
+    .card h3{font-size:1.1rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+    .cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:2rem}
+    .ic{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rsm);padding:1.25rem;margin:1rem 0}
+    .ic h4{font-size:.95rem;font-weight:700;margin-bottom:.5rem;color:var(--blue)}
+    .ic p{font-size:.9rem;color:var(--text2);margin:0}
+    .tc{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
+    .tc .card{height:100%}
+    .sg{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.5rem}
+    .stg{background:var(--blue-s);border:1px solid var(--border);color:var(--blue);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:600;font-family:var(--mono)}
+    .cta-s{padding:4rem 0;text-align:center}
+    .cta-s h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin-bottom:1rem}
+    .cta-s p{color:var(--text2);margin-bottom:1.5rem;max-width:500px;margin-left:auto;margin-right:auto}
+    .ca{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+    .b1{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#0a0a0f;padding:14px 28px;border-radius:var(--rsm);text-decoration:none;font-weight:700;font-size:15px;transition:all .2s;border:none;cursor:pointer}
+    .b1:hover{background:var(--blue2);transform:translateY(-1px)}
+    .b2{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#f0f0f5;padding:14px 28px;border-radius:var(--rsm);text-decoration:none;font-weight:600;font-size:15px;border:1px solid var(--border);transition:all .2s}
+    .b2:hover{border-color:var(--blue);background:var(--card)}
+    .fg{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
+    .fi{padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+    .fi h3{font-size:1rem;font-weight:700;margin-bottom:.75rem;color:var(--blue)}
+    .fi p{font-size:.9rem;color:var(--text2);line-height:1.6}
+    .ficon{font-size:1.5rem;margin-bottom:.75rem;display:block}
+    .mg{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin:2rem 0}
+    .mc{text-align:center;padding:2rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+    .mv{font-size:2.5rem;font-weight:900;color:var(--blue);letter-spacing:-.03em}
+    .ml{font-size:.8rem;color:var(--muted);margin-top:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+    .prose{font-size:1.05rem;color:var(--text2);line-height:1.8;max-width:720px}
+    .prose p{margin-bottom:1.25rem}
+    .prose strong{color:#f0f0f5}
+    .prose a{color:var(--blue);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+    .prose a:hover{border-color:var(--blue)}
+    footer{padding:2rem 0;background:var(--bg2);border-top:1px solid var(--border)}
+    .fc{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.85rem;color:var(--muted)}
+    .flogo{width:24px;height:24px;border-radius:4px;object-fit:contain;vertical-align:middle;margin-right:6px}
+    .fl{display:flex;gap:1.5rem}
+    .fl a{color:var(--muted);text-decoration:none;transition:color .2s}
+    .fl a:hover{color:var(--blue)}
+    @media(max-width:1024px){.tc{grid-template-columns:1fr}.fg{grid-template-columns:1fr}.mg{grid-template-columns:repeat(2,1fr)}.nav-links{display:none}.ham{display:flex}}
+    @media(max-width:640px){.mg{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <!-- Status Banner -->
+  <div style="background:var(--bg2);border-bottom:1px solid var(--border);padding:1rem 0">
+    <div class="w" style="display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;font-size:.9rem;color:var(--text2)">
+      <span class="badge">Portfolio · Full-stack · Open Source</span>
+      <div style="display:flex;gap:1rem">
+        <a href="https://www.linkedin.com/in/kavanasystems/" target="_blank" style="color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500">💼 LinkedIn</a>
+        <a href="mailto:kavanasystems.info@gmail.com" style="color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500">✉️ Email</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#inicio" class="nb"><img src="logo.png?v=2" alt="Kavana" class="nl"><span>Kavana Warehouse</span></a>
+    <ul class="nav-links">
+      <li><a href="#origen">Origen</a></li>
+      <li><a href="#tech">Capacidades</a></li>
+      <li><a href="#stack">Decisiones</a></li>
+      <li><a href="#demo">Demo</a></li>
+    </ul>
+    <button class="ham" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+
+  <!-- Hero -->
+  <header id="inicio" style="padding-top:180px;padding-bottom:3rem;position:relative;overflow:hidden">
+    <div style="position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(109,199,254,0.15) 0%,transparent 70%);pointer-events:none"></div>
+    <div class="w">
+      <div style="max-width:720px">
+        <p style="font-family:var(--mono);font-size:13px;font-weight:500;color:var(--blue);text-transform:uppercase;letter-spacing:.15em;margin-bottom:1rem;display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 16px 6px 12px">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--green)"></span> Proyecto destacado · Product Engineering · Full Stack
+        </p>
+        <h1 style="font-size:clamp(2.25rem,5vw,3.5rem);font-weight:900;letter-spacing:-.04em;line-height:1.1;margin-bottom:1.5rem">KAVANA Warehouse — WMS <span style="background:linear-gradient(135deg,#6dc7fe,#22c55e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">multi-tenant</span> diseñado para un problema real de inventario</h1>
+        <div class="prose" style="margin-top:1.5rem;font-size:1.15rem">
+          <p><strong>Proyecto portfolio de full-stack.</strong> Mi cuñado no sabía cuánto producto gastaba cada centro. Cada semana compraba de más o de menos. Le dije que iba a hacer algo sencillo para llevar la cuenta. Eso fue el inicio de Kawana Warehouse.</p>
+          <p>Tecnologías: React 19, Node.js + Express, PostgreSQL 16, Prisma, Docker. <a href="#stack" style="color:var(--blue)">Ver arquitectura completa →</a></p>
+        </div>
+        <div class="ca" style="margin-top:2rem;justify-content:flex-start">
+          <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse" target="_blank" class="b1">📂 Código en GitHub</a>
+          <a href="#tech" class="b2">🔧 Decisiones técnicas</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Metrics -->
+  <section style="padding-top:0"><div class="w"><div class="mg">
+    <div class="mc"><div class="mv">26</div><div class="ml">Tests automatizados</div></div>
+    <div class="mc"><div class="mv">3</div><div class="ml">Servicios Docker</div></div>
+    <div class="mc"><div class="mv">1</div><div class="ml">ADR documentado</div></div>
+    <div class="mc"><div class="mv">RBAC</div><div class="ml">Control de acceso</div></div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:1.5rem">
+    <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📋 ADR: Multi-tenant + Feature flags</a>
+    <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">🐳 Docker Compose</a>
+  </div>
+  </div></section>
+
+  <!-- Origen -->
+  <section id="origen" style="background:var(--bg2)">
+    <div class="w">
+      <span class="sl">El origen</span>
+      <h2 class="st">Por qué construí esto</h2>
+      <div class="prose">
+        <p>Mi cuñado es el responsable de una empresa de limpieza que gestiona varios centros de trabajo. Un día me comentó que le gustaría tener una app para controlar el stock: que cada trabajador, al coger un producto del almacén, pudiera notificarlo desde su móvil y a él le llegara una notificación al instante.</p>
+        <p>Me preguntó qué herramientas usaba yo para construir mis proyectos. Le hablé de OpenCode y Antigravity. Intentó hacerlo él mismo, pero no tenía los conocimientos necesarios para llevarlo a cabo.</p>
+        <p><strong>Así nació Kavana Warehouse.</strong> Lo construí como proyecto personal, pensando exclusivamente en su problema. Podría usarse en cualquier sector, pero lo diseñé a medida para esa empresa de limpieza. Quise demostrar que podemos crear soluciones específicas, pegadas a un cliente real, y no productos genéricos que intentan servir para todo. Esa es la mentalidad de producto que quiero mostrar con este proyecto.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lo que demuestra -->
+  <section id="tech">
+    <div class="w">
+      <span class="sl">Lo que demuestra</span>
+      <h2 class="st">Capacidades técnicas visibles en este proyecto</h2>
+      <div class="fg">
+        <div class="fi"><span class="ficon">🏗️</span><h3>API REST con Express + Prisma</h3><p>Backend en Node.js 22 con Express y Prisma ORM. Endpoints para productos, almacenes, inventarios, movimientos y usuarios. Respuestas tipadas de extremo a extremo.</p></div>
+        <div class="fi"><span class="ficon">🔒</span><h3>Multi-tenant shared schema</h3><p>Aislamiento lógico por <code>client_id</code> en PostgreSQL 16. Todos los tenants comparten esquema pero los datos están separados a nivel de aplicación. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--blue)">ADR →</a></p></div>
+        <div class="fi"><span class="ficon">👥</span><h3>Auth JWT + RBAC</h3><p>Autenticación stateless con JWT + refresh tokens. Cuatro roles definidos (admin, supervisor, operario, viewer) con permisos granulares por módulo.</p></div>
+        <div class="fi"><span class="ficon">🐳</span><h3>Docker 3 servicios</h3><p>API, dashboard y app mobile como servicios independientes orquestados con docker-compose. Entorno replicable con un comando.</p></div>
+        <div class="fi"><span class="ficon">📦</span><h3>Inventario multi-almacén</h3><p>Gestión de productos con categorías y proveedores. Entradas, salidas, transferencias entre centros e inventarios físicos con detección de desviaciones.</p></div>
+        <div class="fi"><span class="ficon">📊</span><h3>Dashboard con KPIs</h3><p>Vista operativa con métricas de consumo, alertas de stock bajo y KPIs en tiempo real por centro y período.</p></div>
+        <div class="fi"><span class="ficon">📋</span><h3>Trazabilidad completa</h3><p>Registro histórico de todos los movimientos con filtros por fecha, almacén, tipo de operación y usuario. Nada desaparece sin dejar rastro.</p></div>
+        <div class="fi"><span class="ficon">🔗</span><h3>API REST documentada</h3><p>API diseñada para integraciones con ERPs o sistemas externos. Documentación técnica de endpoints disponible en el repositorio.</p></div>
+        <div class="fi"><span class="ficon">🧪</span><h3>26 tests automatizados</h3><p>Tests unitarios y de integración con el stack real. Ejecutables en local con <code>npm test</code>.</p></div>
+        <div class="fi"><span class="ficon">📋</span><h3>1 ADR documentado</h3><p>La decisión de multi-tenant con feature flags está documentada con contexto, alternativas y consecuencias. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--blue)">Ver ADR →</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Decisiones técnicas -->
+  <section id="stack" style="background:var(--bg2)">
+    <div class="w">
+      <span class="sl">Decisiones técnicas</span>
+      <h2 class="st">Criterio aplicado, no solo código</h2>
+      <div class="prose">
+        <p>Decisiones de arquitectura que responden a restricciones reales: un desarrollador solo, un cliente concreto, necesidad de desplegar rápido y de forma reproducible.</p>
+      </div>
+      <div class="fg">
+        <div class="fi"><h3>🔒 Shared Schema multi-tenant</h3><p>Todos los clientes comparten esquema con aislamiento por <code>client_id</code>. Simple de mantener, eficiente en recursos, y suficiente para el dominio. Para proyectos más grandes se migraría a RLS. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--blue)">ADR →</a></p></div>
+        <div class="fi"><h3>👤 JWT + RBAC en vez de sessions</h3><p>Arquitectura stateless: sin estado en servidor, escalable horizontalmente. Refresh tokens para no pedir login cada 15 minutos. Cuatro roles con granularidad por módulo.</p></div>
+        <div class="fi"><h3>🐳 Docker 3 servicios independientes</h3><p>API, dashboard y app separados como contenedores con docker-compose. Un comando levanta todo el stack: PostgreSQL + API + dashboard + app mobile.</p></div>
+        <div class="fi"><h3>🗄️ Prisma ORM en vez de SQL raw</h3><p>Schemas declarativos, migraciones automáticas y type-safety desde la BD hasta el frontend. Menos errores, más velocidad de iteración.</p></div>
+        <div class="fi"><h3>👤 El supervisor decide quién registra, no todos los limpiadores</h3><p>Primero probamos que todos los operarios lo hicieran desde el móvil, pero fue un lío: se olvidaban, se equivocaban, y el trabajo se ralentizó. Entonces cambiamos: el supervisor elige quién lleva el control. A veces él mismo lo hace. Así evitamos que el registro genere fricción y el equipo pueda centrarse en limpiar sin interrupciones.</p></div>
+        <div class="fi"><h3>📋 Decisiones documentadas</h3><p>La arquitectura multi-tenant con feature flags está documentada en un ADR: qué problema resuelve, qué alternativas se consideraron y por qué se tomó esa decisión. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--blue)">Ver ADR →</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stack -->
+  <section id="tech-stack">
+    <div class="w">
+      <span class="sl">Stack tecnológico</span>
+      <h2 class="st">Arquitectura real, no mockups</h2>
+      <div class="tc">
+        <div class="card"><h3>🔙 Backend</h3><div class="sg"><span class="stg">Node.js 22</span><span class="stg">Express</span><span class="stg">Prisma</span><span class="stg">PostgreSQL 16</span><span class="stg">JWT</span><span class="stg">RBAC</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>API REST multi-tenant</li><li>Shared schema con client_id</li><li>Auth stateless JWT + refresh tokens</li><li>Cuatro roles con permisos por módulo</li></ul></div>
+        <div class="card"><h3>🎨 Frontend</h3><div class="sg"><span class="stg">React 19</span><span class="stg">Vite</span><span class="stg">TypeScript</span><span class="stg">Tailwind CSS</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>Dashboard para supervisores</li><li>App mobile para operarios</li><li>Tipado end-to-end con Prisma</li></ul></div>
+      </div>
+      <div class="card" style="margin-top:2rem">
+        <h3>🏗️ Infraestructura</h3>
+        <div class="sg"><span class="stg">Docker</span><span class="stg">Docker Compose</span><span class="stg">GitHub Actions</span><span class="stg">VPS Linux</span></div>
+        <div style="margin-top:1rem;font-size:.85rem;color:var(--text2);border-top:1px solid var(--border);padding-top:1rem">
+          📚 <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/README.md" target="_blank" style="color:var(--blue);text-decoration:none;font-weight:600">README completo</a>
+          · <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/tree/main/docs" target="_blank" style="color:var(--blue);text-decoration:none;font-weight:600">Documentación</a>
+          · <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse" target="_blank" style="color:var(--blue);text-decoration:none;font-weight:600">Repositorio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo -->
+  <section id="demo" style="background:var(--bg2)">
+    <div class="w">
+      <span class="sl">Demo en vivo</span>
+      <h2 class="st">Pruébalo ahora</h2>
+      <div class="tc" style="margin-top:2rem">
+        <div class="card" style="text-align:center">
+          <h3 style="justify-content:center;font-size:1.25rem">🏭 Landing + Dashboard</h3>
+          <p style="color:var(--text2);font-size:.9rem;margin:1rem 0">Escenario demo: empresa de limpieza con 3 centros. Dashboard con KPIs, alertas de stock bajo y gestión de inventario.</p>
+          <a href="https://warehouse.kavanasystems.com/" target="_blank" class="b1" style="margin-top:1rem">Abrir demo →</a>
+        </div>
+        <div class="card" style="text-align:center">
+          <h3 style="justify-content:center;font-size:1.25rem">💻 Código completo</h3>
+          <p style="color:var(--text2);font-size:.9rem;margin:1rem 0">Repositorio público con docker-compose: levanta PostgreSQL, API, dashboard y app en local con un solo comando.</p>
+          <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse" target="_blank" class="b1" style="margin-top:1rem">Ver en GitHub →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-s">
+    <div class="w">
+      <h2>¿Quieres ver más?</h2>
+      <p>Este es uno de los proyectos de mi portfolio. Si quieres ver el código, las decisiones técnicas documentadas, o simplemente conectar:</p>
+      <div class="ca">
+        <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse" target="_blank" class="b1">📂 Código + ADRs + Docs</a>
+        <a href="https://www.linkedin.com/in/kavanasystems/" target="_blank" class="b2">💼 LinkedIn</a>
+        <a href="https://www.kavanasystems.com" target="_blank" class="b2">🌐 Más proyectos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="w fc">
+      <div><img src="logo.png?v=2" alt="Kavana" class="flogo"><span>© 2026 KAVANA WAREHOUSE · Jorge Adán</span></div>
+      <div class="fl">
+        <a href="https://www.kavanasystems.com">Kavana Systems</a>
+        <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/kavanasystems/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
