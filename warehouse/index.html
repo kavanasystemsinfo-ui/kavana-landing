@@ -121,8 +121,8 @@
 
   <!-- Metrics -->
   <section style="padding-top:0"><div class="w"><div class="mg">
-    <div class="mc"><div class="mv">26</div><div class="ml">Tests automatizados</div></div>
-    <div class="mc"><div class="mv">3</div><div class="ml">Servicios Docker</div></div>
+    <div class="mc"><div class="mv">35</div><div class="ml">Tests automatizados</div></div>
+    <div class="mc"><div class="mv">31.000+</div><div class="ml">Movimientos simulados</div></div>
     <div class="mc"><div class="mv">1</div><div class="ml">ADR documentado</div></div>
     <div class="mc"><div class="mv">RBAC</div><div class="ml">Control de acceso</div></div>
   </div>
@@ -138,7 +138,7 @@
       <span class="sl">El origen</span>
       <h2 class="st">Por qué construí esto</h2>
       <div class="prose">
-        <p>Mi cuñado es el responsable de una empresa de limpieza que gestiona varios centros de trabajo. Un día me comentó que le gustaría tener una app para controlar el stock: que cada trabajador, al coger un producto del almacén, pudiera notificarlo desde su móvil y a él le llegara una notificación al instante.</p>
+        <p>Mi cuñado es el responsable de una empresa de limpieza que gestiona varios centros de trabajo. Un día me comentó que no sabía cuánto producto gastaba cada centro: cada semana compraba de más o de menos, y nadie tenía una foto clara del stock real. Me pidió una forma de llevar la cuenta sin depender de que cada trabajador avisara desde su móvil.</p>
         <p>Me preguntó qué herramientas usaba yo para construir mis proyectos. Le hablé de OpenCode y Antigravity. Intentó hacerlo él mismo, pero no tenía los conocimientos necesarios para llevarlo a cabo.</p>
         <p><strong>Así nació Kavana Warehouse.</strong> Lo construí como proyecto personal, pensando exclusivamente en su problema. Podría usarse en cualquier sector, pero lo diseñé a medida para esa empresa de limpieza. Quise demostrar que podemos crear soluciones específicas, pegadas a un cliente real, y no productos genéricos que intentan servir para todo. Esa es la mentalidad de producto que quiero mostrar con este proyecto.</p>
       </div>
@@ -151,15 +151,15 @@
       <span class="sl">Lo que demuestra</span>
       <h2 class="st">Capacidades técnicas visibles en este proyecto</h2>
       <div class="fg">
-        <div class="fi"><span class="ficon">🏗️</span><h3>API REST con Express + Prisma</h3><p>Backend en Node.js 22 con Express y Prisma ORM. Endpoints para productos, almacenes, inventarios, movimientos y usuarios. Respuestas tipadas de extremo a extremo.</p></div>
+        <div class="fi"><span class="ficon">🏗️</span><h3>API REST con Express + Prisma</h3><p>Backend en Node.js 20 con Express y Prisma ORM. Endpoints para productos, centros, inventarios, movimientos y costes. Respuestas tipadas de extremo a extremo.</p></div>
         <div class="fi"><span class="ficon">🔒</span><h3>Multi-tenant shared schema</h3><p>Aislamiento lógico por <code>client_id</code> en PostgreSQL 16. Todos los tenants comparten esquema pero los datos están separados a nivel de aplicación. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--blue)">ADR →</a></p></div>
-        <div class="fi"><span class="ficon">👥</span><h3>Auth JWT + RBAC</h3><p>Autenticación stateless con JWT + refresh tokens. Cuatro roles definidos (admin, supervisor, operario, viewer) con permisos granulares por módulo.</p></div>
-        <div class="fi"><span class="ficon">🐳</span><h3>Docker 3 servicios</h3><p>API, dashboard y app mobile como servicios independientes orquestados con docker-compose. Entorno replicable con un comando.</p></div>
-        <div class="fi"><span class="ficon">📦</span><h3>Inventario multi-almacén</h3><p>Gestión de productos con categorías y proveedores. Entradas, salidas, transferencias entre centros e inventarios físicos con detección de desviaciones.</p></div>
-        <div class="fi"><span class="ficon">📊</span><h3>Dashboard con KPIs</h3><p>Vista operativa con métricas de consumo, alertas de stock bajo y KPIs en tiempo real por centro y período.</p></div>
-        <div class="fi"><span class="ficon">📋</span><h3>Trazabilidad completa</h3><p>Registro histórico de todos los movimientos con filtros por fecha, almacén, tipo de operación y usuario. Nada desaparece sin dejar rastro.</p></div>
+        <div class="fi"><span class="ficon">👥</span><h3>Auth JWT + RBAC</h3><p>Autenticación stateless con JWT + refresh tokens. Dos roles: <code>oficina</code> (gestión total) y <code>supervisor</code> (recuento de inventario). El usuario se identifica con nombre de usuario, no con email.</p></div>
+        <div class="fi"><span class="ficon">🐳</span><h3>Docker Compose</h3><p>PostgreSQL, API y dashboard como servicios orquestados con docker-compose. Entorno replicable con un comando.</p></div>
+        <div class="fi"><span class="ficon">📦</span><h3>Inventario multi-centro</h3><p>Gestión de productos con categorías. Entradas, salidas, consumos por centro y recuentos físicos con detección de desviaciones y propuesta de compra.</p></div>
+        <div class="fi"><span class="ficon">📊</span><h3>Dashboard con KPIs</h3><p>Vista operativa con métricas de consumo, evolución mensual, alertas de stock bajo y control de presupuesto por centro.</p></div>
+        <div class="fi"><span class="ficon">📋</span><h3>Trazabilidad completa</h3><p>Registro histórico de todos los movimientos con filtros por fecha, centro, producto y usuario. Nada desaparece sin dejar rastro.</p></div>
         <div class="fi"><span class="ficon">🔗</span><h3>API REST documentada</h3><p>API diseñada para integraciones con ERPs o sistemas externos. Documentación técnica de endpoints disponible en el repositorio.</p></div>
-        <div class="fi"><span class="ficon">🧪</span><h3>26 tests automatizados</h3><p>Tests unitarios y de integración con el stack real. Ejecutables en local con <code>npm test</code>.</p></div>
+        <div class="fi"><span class="ficon">🧪</span><h3>35 tests automatizados</h3><p>Tests de integración con el stack real (supertest + PostgreSQL). Ejecutables en local con <code>npm test</code> y en CI con GitHub Actions.</p></div>
         <div class="fi"><span class="ficon">📋</span><h3>1 ADR documentado</h3><p>La decisión de multi-tenant con feature flags está documentada con contexto, alternativas y consecuencias. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--blue)">Ver ADR →</a></p></div>
       </div>
     </div>
@@ -175,10 +175,10 @@
       </div>
       <div class="fg">
         <div class="fi"><h3>🔒 Shared Schema multi-tenant</h3><p>Todos los clientes comparten esquema con aislamiento por <code>client_id</code>. Simple de mantener, eficiente en recursos, y suficiente para el dominio. Para proyectos más grandes se migraría a RLS. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--blue)">ADR →</a></p></div>
-        <div class="fi"><h3>👤 JWT + RBAC en vez de sessions</h3><p>Arquitectura stateless: sin estado en servidor, escalable horizontalmente. Refresh tokens para no pedir login cada 15 minutos. Cuatro roles con granularidad por módulo.</p></div>
-        <div class="fi"><h3>🐳 Docker 3 servicios independientes</h3><p>API, dashboard y app separados como contenedores con docker-compose. Un comando levanta todo el stack: PostgreSQL + API + dashboard + app mobile.</p></div>
+        <div class="fi"><h3>👤 JWT + RBAC en vez de sessions</h3><p>Arquitectura stateless: sin estado en servidor, escalable horizontalmente. Refresh tokens para no pedir login cada 15 minutos. Dos roles: <code>oficina</code> (gestión total) y <code>supervisor</code> (recuento de inventario).</p></div>
+        <div class="fi"><h3>🐳 Docker Compose</h3><p>PostgreSQL, API y dashboard separados como contenedores con docker-compose. Un comando levanta todo el stack en local.</p></div>
         <div class="fi"><h3>🗄️ Prisma ORM en vez de SQL raw</h3><p>Schemas declarativos, migraciones automáticas y type-safety desde la BD hasta el frontend. Menos errores, más velocidad de iteración.</p></div>
-        <div class="fi"><h3>👤 El supervisor decide quién registra, no todos los limpiadores</h3><p>Primero probamos que todos los operarios lo hicieran desde el móvil, pero fue un lío: se olvidaban, se equivocaban, y el trabajo se ralentizó. Entonces cambiamos: el supervisor elige quién lleva el control. A veces él mismo lo hace. Así evitamos que el registro genere fricción y el equipo pueda centrarse en limpiar sin interrupciones.</p></div>
+        <div class="fi"><h3>👤 Dos roles, no cuatro</h3><p>Primero diseñamos roles para controlar al personal (limpiadores, operarios), pero la app evolucionó a gestión de stock pura. Se simplificó: <code>oficina</code> lo gestiona todo y <code>supervisor</code> hace el recuento de inventario. Menos roles, menos fricción, más foco en el problema real.</p></div>
         <div class="fi"><h3>📋 Decisiones documentadas</h3><p>La arquitectura multi-tenant con feature flags está documentada en un ADR: qué problema resuelve, qué alternativas se consideraron y por qué se tomó esa decisión. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--blue)">Ver ADR →</a></p></div>
       </div>
     </div>
@@ -190,12 +190,12 @@
       <span class="sl">Stack tecnológico</span>
       <h2 class="st">Arquitectura real, no mockups</h2>
       <div class="tc">
-        <div class="card"><h3>🔙 Backend</h3><div class="sg"><span class="stg">Node.js 22</span><span class="stg">Express</span><span class="stg">Prisma</span><span class="stg">PostgreSQL 16</span><span class="stg">JWT</span><span class="stg">RBAC</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>API REST multi-tenant</li><li>Shared schema con client_id</li><li>Auth stateless JWT + refresh tokens</li><li>Cuatro roles con permisos por módulo</li></ul></div>
-        <div class="card"><h3>🎨 Frontend</h3><div class="sg"><span class="stg">React 19</span><span class="stg">Vite</span><span class="stg">TypeScript</span><span class="stg">Tailwind CSS</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>Dashboard para supervisores</li><li>App mobile para operarios</li><li>Tipado end-to-end con Prisma</li></ul></div>
+        <div class="card"><h3>🔙 Backend</h3><div class="sg"><span class="stg">Node.js 20</span><span class="stg">Express</span><span class="stg">Prisma</span><span class="stg">PostgreSQL 16</span><span class="stg">JWT</span><span class="stg">RBAC</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>API REST multi-tenant</li><li>Shared schema con client_id</li><li>Auth stateless JWT + refresh tokens</li><li>Dos roles: oficina y supervisor</li></ul></div>
+        <div class="card"><h3>🎨 Frontend</h3><div class="sg"><span class="stg">React 19</span><span class="stg">Vite</span><span class="stg">TypeScript</span><span class="stg">CSS propio</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>Dashboard para la oficina</li><li>Vista de recuento para supervisores</li><li>Tipado end-to-end con Prisma</li></ul></div>
       </div>
       <div class="card" style="margin-top:2rem">
         <h3>🏗️ Infraestructura</h3>
-        <div class="sg"><span class="stg">Docker</span><span class="stg">Docker Compose</span><span class="stg">GitHub Actions</span><span class="stg">VPS Linux</span></div>
+        <div class="sg"><span class="stg">Docker</span><span class="stg">Docker Compose</span><span class="stg">GitHub Actions</span><span class="stg">Vercel</span><span class="stg">Render</span><span class="stg">Neon PostgreSQL</span></div>
         <div style="margin-top:1rem;font-size:.85rem;color:var(--text2);border-top:1px solid var(--border);padding-top:1rem">
           📚 <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/README.md" target="_blank" style="color:var(--blue);text-decoration:none;font-weight:600">README completo</a>
           · <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/tree/main/docs" target="_blank" style="color:var(--blue);text-decoration:none;font-weight:600">Documentación</a>
@@ -213,13 +213,13 @@
       <div class="tc" style="margin-top:2rem">
         <div class="card" style="text-align:center">
           <h3 style="justify-content:center;font-size:1.25rem">🏭 Landing + Dashboard</h3>
-          <p style="color:var(--text2);font-size:.9rem;margin:1rem 0">Escenario demo: empresa de limpieza con 4 centros. Dashboard con KPIs, alertas de stock bajo y gestión de inventario.</p>
+          <p style="color:var(--text2);font-size:.9rem;margin:1rem 0">Escenario demo: empresa de limpieza con 10 centros, 31 productos y 3 meses de histórico simulado. Dashboard con KPIs, evolución de consumo mensual, alertas de stock bajo y control de presupuesto por centro.</p>
           <p style="color:var(--text2);font-size:.9rem;margin:.5rem 0"><strong style="color:var(--text)">Demo:</strong> usuario <code style="background:var(--bg);padding:2px 6px;border-radius:4px">warehouse</code> · contraseña <code style="background:var(--bg);padding:2px 6px;border-radius:4px">kavana</code></p>
           <a href="https://warehouse.kavanasystems.com/" target="_blank" class="b1" style="margin-top:1rem">Abrir demo →</a>
         </div>
         <div class="card" style="text-align:center">
           <h3 style="justify-content:center;font-size:1.25rem">💻 Código completo</h3>
-          <p style="color:var(--text2);font-size:.9rem;margin:1rem 0">Repositorio público con docker-compose: levanta PostgreSQL, API, dashboard y app en local con un solo comando.</p>
+          <p style="color:var(--text2);font-size:.9rem;margin:1rem 0">Repositorio público con docker-compose: levanta PostgreSQL, API y dashboard en local con un solo comando.</p>
           <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse" target="_blank" class="b1" style="margin-top:1rem">Ver en GitHub →</a>
         </div>
       </div>
