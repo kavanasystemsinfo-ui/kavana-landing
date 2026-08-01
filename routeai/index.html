@@ -98,6 +98,7 @@
       <li><a href="#problema">Origen</a></li>
       <li><a href="#tech">Capacidades</a></li>
       <li><a href="#stack">Decisiones</a></li>
+      <li><a href="#flujo">Flujo</a></li>
       <li><a href="#demo">Demo</a></li>
     </ul>
     <button class="ham" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -113,7 +114,7 @@
         </p>
         <h1 style="font-size:clamp(2.25rem,5vw,3.5rem);font-weight:900;letter-spacing:-.04em;line-height:1.1;margin-bottom:1.5rem">KAVANA Route AI — Plataforma de reparto con OCR, optimización 2-opt y firma digital</h1>
         <div class="prose" style="margin-top:1.5rem;font-size:1.15rem">
-          <p><strong>Proyecto portfolio de backend y full-stack.</strong> Construí un sistema completo de gestión de reparto con dos frontends (Torre de Control + App PWA), API REST, OCR, optimización de rutas, firma digital, métricas de coste real y documentación técnica (ADRs).</p>
+          <p><strong>Proyecto portfolio de backend y full-stack.</strong> Construí un sistema completo de gestión de reparto con dos frontends (Torre de Control + app web del repartidor), API REST, OCR, optimización de rutas, firma digital, métricas de coste real y documentación técnica (ADRs).</p>
           <p>Tecnologías: Node + Express, React + Vite, PostgreSQL, Nominatim, Tesseract.js, 2-opt, GitHub Actions + Pages, Render. <a href="#stack" style="color:var(--gold)">Ver arquitectura completa →</a></p>
         </div>
         <div class="ca" style="margin-top:2rem;justify-content:flex-start">
@@ -126,10 +127,10 @@
 
   <!-- Metrics -->
   <section style="padding-top:0"><div class="w"><div class="mg">
-    <div class="mc"><div class="mv">40+</div><div class="ml">Tests automatizados</div></div>
-    <div class="mc"><div class="mv">3</div><div class="ml">Workflows CI/CD</div></div>
-    <div class="mc"><div class="mv">2</div><div class="ml">Frontends activos</div></div>
-    <div class="mc"><div class="mv">2-opt</div><div class="ml">Algoritmo local</div></div>
+    <div class="mc"><div class="mv">43</div><div class="ml">Tests automatizados</div></div>
+    <div class="mc"><div class="mv">2</div><div class="ml">Workflows CI/CD</div></div>
+    <div class="mc"><div class="mv">23</div><div class="ml">Endpoints API</div></div>
+    <div class="mc"><div class="mv">6</div><div class="ml">ADRs documentados</div></div>
   </div>
   <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:1.5rem">
     <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/001-reemplazo-ia-por-2opt.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📋 ADR: IA → 2-opt</a>
@@ -158,15 +159,15 @@
       <span class="sl">Lo que demuestra</span>
       <h2 class="st">Capacidades técnicas visibles en este proyecto</h2>
       <div class="fg">
-        <div class="fi"><span class="ficon">🏗️</span><h3>Arquitectura backend real</h3><p>API REST con Express, 20+ endpoints, middlewares JWT, carga de archivos, generación de PDF, OCR, geocodificación. Separación clara de responsabilidades en servicios.</p></div>
+        <div class="fi"><span class="ficon">🏗️</span><h3>Arquitectura backend real</h3><p>API REST con Express, 23 endpoints, middlewares JWT, carga de archivos, generación de PDF, OCR, geocodificación. Separación clara de responsabilidades en servicios.</p></div>
         <div class="fi"><span class="ficon">🗄️</span><h3>Base de datos dual</h3><p>PostgreSQL en producción (Neon) + JSON file en desarrollo. Misma interfaz de queries, dos implementaciones. Sin cambiar código de negocio al cambiar de BD.</p></div>
         <div class="fi"><span class="ficon">🧮</span><h3>Algoritmo 2-opt propio</h3><p>Implementé el algoritmo de optimización de rutas desde cero. Vecino más cercano + 2-opt. Mejor que IA gratuita, sin coste, <1ms. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/001-reemplazo-ia-por-2opt.md" target="_blank" style="color:var(--gold)">Decisión documentada</a>.</p></div>
         <div class="fi"><span class="ficon">🔍</span><h3>Geocoding con fallbacks + validación</h3><p>Nominatim gratuito pero impreciso. 8 formatos de query por dirección + bounding box de Valencia. ~80% acierto. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/002-geocodificacion-nominatim-fallbacks.md" target="_blank" style="color:var(--gold)">ADR →</a></p></div>
         <div class="fi"><span class="ficon">📸</span><h3>OCR con Tesseract.js + pdftotext</h3><p>Escanea imágenes (Tesseract), PDFs (pdftotext) y CSVs. Extrae direcciones y las limpia semánticamente para geocodificación.</p></div>
         <div class="fi"><span class="ficon">🔐</span><h3>Auth JWT + RBAC</h3><p>Dos roles (office, driver) con endpoints protegidos. Login por PIN, token 8h, crypto nativo.</p></div>
-        <div class="fi"><span class="ficon">📱</span><h3>PWA + Capacitor</h3><p>App del repartidor como Progressive Web App. Offline-first. Instalable sin app store.</p></div>
-        <div class="fi"><span class="ficon">📋</span><h3>5 ADRs documentados</h3><p>Cada decisión clave documentada con contexto, alternativas y consecuencias. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/tree/main/docs/adr" target="_blank" style="color:var(--gold)">Ver ADRs →</a></p></div>
-        <div class="fi"><span class="ficon">🧪</span><h3>40+ tests</h3><p>Tests con node:test (sin framework). Pruebas de API, base de datos, geocoding. CI en GitHub Actions.</p></div>
+        <div class="fi"><span class="ficon">📱</span><h3>App web pensada para móvil</h3><p>La app del repartidor es una SPA responsive: se añade a la pantalla de inicio y se abre como una app más. Sin store, actualización instantánea.</p></div>
+        <div class="fi"><span class="ficon">📋</span><h3>6 ADRs documentados</h3><p>Cada decisión clave documentada con contexto, alternativas y consecuencias. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/tree/main/docs/adr" target="_blank" style="color:var(--gold)">Ver ADRs →</a></p></div>
+        <div class="fi"><span class="ficon">🧪</span><h3>43 tests</h3><p>Tests con node:test (sin framework). Pruebas de API, base de datos, geocoding, OCR y PDF. CI en GitHub Actions.</p></div>
         <div class="fi"><span class="ficon">🚀</span><h3>CI/CD real en dos plataformas</h3><p>GitHub Actions build frontends → GitHub Pages. Backend en Render. Push a main = deploy automático.</p></div>
       </div>
     </div>
@@ -184,9 +185,9 @@
         <div class="fi"><h3>🧮 2-opt en vez de IA para rutas</h3><p>La IA parecía la opción obvia, pero los modelos gratuitos daban resultados inconsistentes y tardaban 30s. El algoritmo 2-opt es determinista, milisegundos, 0€ de coste y no necesita internet. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/001-reemplazo-ia-por-2opt.md" target="_blank" style="color:var(--gold)">ADR →</a></p></div>
         <div class="fi"><h3>🗺️ Nominatim con validación geográfica</h3><p>Geocodificar direciones españolas gratis no es trivial. Implementé 8 formatos de query por dirección + bounding box de Valencia para filtrar resultados de otras ciudades. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/002-geocodificacion-nominatim-fallbacks.md" target="_blank" style="color:var(--gold)">ADR →</a></p></div>
         <div class="fi"><h3>🗄️ BD dual: PostgreSQL y JSON</h3><p>El sistema funciona con PostgreSQL en producción o con un archivo JSON en desarrollo — sin cambiar una línea de código de negocio. Misma interfaz de queries, dos implementaciones. Ideal para desarrollar sin infraestructura.</p></div>
-        <div class="fi"><h3>📐 5 ADRs documentados</h3><p>Cada decisión importante tiene su Architecture Decision Record: contexto, alternativas evaluadas, consecuencias. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/tree/main/docs/adr" target="_blank" style="color:var(--gold)">Ver ADRs →</a></p></div>
+        <div class="fi"><h3>📐 6 ADRs documentados</h3><p>Cada decisión importante tiene su Architecture Decision Record: contexto, alternativas evaluadas, consecuencias. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/tree/main/docs/adr" target="_blank" style="color:var(--gold)">Ver ADRs →</a></p></div>
         <div class="fi"><h3>🚀 CI/CD en dos plataformas</h3><p>GitHub Actions build los frontends y los despliega a GitHub Pages. El backend Node vive en Render. Despliegue automático con cada push a main. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/005-despliegue-github-pages-render.md" target="_blank" style="color:var(--gold)">ADR →</a></p></div>
-        <div class="fi"><h3>📱 PWA + APK nativo</h3><p>La app del repartidor funciona como Progressive Web App (instalable sin Play Store) y como APK generado con Capacitor para Android. Offline-first: funciona sin conexión.</p></div>
+        <div class="fi"><h3>📱 App web para el repartidor</h3><p>La app del repartidor es una web responsive: se añade a la pantalla de inicio desde el navegador y se actualiza sola, sin store ni build. Se evaluó PWA con service worker y app nativa; se descartaron por mantenimiento (ADR-001).</p></div>
       </div>
       <div style="text-align:center;margin-top:2rem">
         <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/DECISIONS.md" target="_blank" class="b2">📐 Ver todas las decisiones técnicas</a>
@@ -198,8 +199,8 @@
       <span class="sl">Stack tecnológico</span>
       <h2 class="st">Arquitectura real, no mockups</h2>
       <div class="tc">
-        <div class="card"><h3>🔙 Backend</h3><div class="sg"><span class="stg">Node 20+</span><span class="stg">Express 4</span><span class="stg">pg</span><span class="stg">JSON</span><span class="stg">JWT</span><span class="stg">PDFKit</span><span class="stg">pdftotext</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>API REST 20+ endpoints</li><li>BD dual: PostgreSQL (Neon) + JSON fallback</li><li>Geocoding Nominatim + validación Valencia</li><li>Optimización 2-opt (0€, <1ms)</li></ul></div>
-        <div class="card"><h3>🎨 Frontend</h3><div class="sg"><span class="stg">React 18</span><span class="stg">Vite</span><span class="stg">Canvas</span><span class="stg">jsPDF</span><span class="stg">Capacitor</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>PWA + APK Android</li><li>Torre de Control desktop</li><li>Estilo oscuro Electric Gold</li></ul></div>
+        <div class="card"><h3>🔙 Backend</h3><div class="sg"><span class="stg">Node 20+</span><span class="stg">Express 4</span><span class="stg">pg</span><span class="stg">JSON</span><span class="stg">JWT</span><span class="stg">PDFKit</span><span class="stg">pdftotext</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>API REST 23 endpoints</li><li>BD dual: PostgreSQL (Neon) + JSON fallback</li><li>Geocoding Nominatim + validación Valencia</li><li>Optimización 2-opt (0€, <1ms)</li></ul></div>
+        <div class="card"><h3>🎨 Frontend</h3><div class="sg"><span class="stg">React 18</span><span class="stg">Vite</span><span class="stg">Canvas</span><span class="stg">jsPDF</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>App web del repartidor responsive</li><li>Torre de Control desktop</li><li>Estilo oscuro Electric Gold</li></ul></div>
       </div>
       <div class="card" style="margin-top:2rem">
         <h3>🏗️ Infraestructura</h3>
@@ -207,9 +208,33 @@
         <div style="margin-top:1rem;font-size:.85rem;color:var(--text2);border-top:1px solid var(--border);padding-top:1rem">
           📚 <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/DECISIONS.md" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:600">Decisiones técnicas</a>
           · <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/README.md" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:600">README completo</a>
-          · <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/tree/main/docs/adr" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:600">ADRs (5 documentos)</a>
+          · <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/tree/main/docs/adr" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:600">ADRs (6 documentos)</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Flujo -->
+  <section id="flujo" style="background:var(--bg2)">
+    <div class="w">
+      <span class="sl">El flujo completo</span>
+      <h2 class="st">Cómo circula un reparto</h2>
+      <div class="card" style="font-family:var(--mono);font-size:.9rem;line-height:2;color:var(--text2);overflow-x:auto;white-space:pre">Oficina
+  │  sube albaranes (OCR de imagen / PDF / CSV)
+  ▼
+API REST (Express + JWT)
+  │  geocodifica direcciones (Nominatim + validación Valencia)
+  │  optimiza la ruta (2-opt, &lt;1ms)
+  ▼
+PostgreSQL (Neon)  ·  JSON en desarrollo
+  │
+  ▼
+App del repartidor (web, móvil)
+  │  entrega en orden optimizado
+  │  firma digital del cliente (Canvas → POD en PDF)
+  ▼
+Torre de Control
+     entregas cerradas · coste por repartidor y combustible</div>
     </div>
   </section>
 
