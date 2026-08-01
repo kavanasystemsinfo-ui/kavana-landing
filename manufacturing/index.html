@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kavana Manufacturing: MES Offline-First - Proyecto Portfolio Full-Stack</title>
-  <meta name="description" content="Proyecto portfolio de full-stack: MES offline-first construido desde el suelo de fábrica tras 8 años como operario. Multi-tenant con PostgreSQL RLS, sync BullMQ, ~208 tests, 5 ADRs. TypeScript, NestJS, React, Prisma." />
+  <meta name="description" content="Proyecto portfolio de full-stack: MES offline-first construido desde el suelo de fábrica tras 8 años como operario. Multi-tenant con PostgreSQL RLS, sync BullMQ, ~234 tests, 5 ADRs. TypeScript, NestJS, React, Prisma." />
   <link rel="canonical" href="https://www.kavanasystems.com/manufacturing/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -130,8 +130,8 @@
 
   <!-- Metrics -->
   <section style="padding-top:0"><div class="w"><div class="mg">
-    <div class="mc"><div class="mv">208+</div><div class="ml">Tests automatizados</div></div>
-    <div class="mc"><div class="mv">13</div><div class="ml">Módulos NestJS</div></div>
+    <div class="mc"><div class="mv">234</div><div class="ml">Tests automatizados</div></div>
+    <div class="mc"><div class="mv">17</div><div class="ml">Módulos NestJS</div></div>
     <div class="mc"><div class="mv">5</div><div class="ml">ADRs documentados</div></div>
     <div class="mc"><div class="mv">RLS</div><div class="ml">Aislamiento multi-tenant</div></div>
   </div>
@@ -163,11 +163,11 @@
       <span class="sl">Lo que demuestra</span>
       <h2 class="st">Capacidades técnicas visibles en este proyecto</h2>
       <div class="fg">
-        <div class="fi"><span class="ficon">🏗️</span><h3>Arquitectura backend real</h3><p>NestJS con 13 módulos (orders, OEE, quality, costs, sync, auth, tenants...) y guards globales: auth, contexto de tenant, rate-limit, validación. API OpenAPI 3.1.</p></div>
+        <div class="fi"><span class="ficon">🏗️</span><h3>Arquitectura backend real</h3><p>NestJS con 17 módulos (orders, OEE, quality, costs, sync, auth, tenants...) y guards globales: auth, contexto de tenant, rate-limit, validación. API OpenAPI 3.1.</p></div>
         <div class="fi"><span class="ficon">🔒</span><h3>Multi-tenant con RLS</h3><p>Shared schema + Row Level Security en PostgreSQL. El aislamiento lo enforza la base de datos (<code>client_id</code>), imposible de evadir incluso con SQL raw. Verificado con tests cross-tenant. <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/docs/adr/001-shared-schema-multi-tenant-rls.md" target="_blank" style="color:var(--orange)">ADR →</a></p></div>
         <div class="fi"><span class="ficon">📴</span><h3>Offline-first real, no cache-only</h3><p>Dexie.js/IndexedDB como base de datos local completa, no un Service Worker que solo cachea assets. El operario crea órdenes y registra calidad sin red; cada mutación genera un evento en cola local (outbox). <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/docs/adr/003-offline-first-dexie.md" target="_blank" style="color:var(--orange)">ADR →</a></p></div>
         <div class="fi"><span class="ficon">🔄</span><h3>Sync durable con BullMQ</h3><p>Colas Redis (<code>sync:push</code>, <code>sync:pull</code>, <code>analytics:aggregate</code>) con retry exponencial, dead-letter e idempotency keys. Nada se pierde aunque el cliente esté días offline. Métricas Prometheus por cola.</p></div>
-        <div class="fi"><span class="ficon">🧪</span><h3>~208 tests backend</h3><p>Unitarios, integración y e2e con Testcontainers (PostgreSQL y Redis reales en CI). Incluye tests de aislamiento multi-tenant, cálculos OEE y transacciones atómicas de stock.</p></div>
+        <div class="fi"><span class="ficon">🧪</span><h3>234 tests backend</h3><p>Unitarios, integración y e2e con Testcontainers (PostgreSQL y Redis reales en CI). Incluye tests de aislamiento multi-tenant, cálculos OEE y transacciones atómicas de stock.</p></div>
         <div class="fi"><span class="ficon">🧤</span><h3>UX diseñada para guantes</h3><p>Botones de 64px, contraste alto, flujo lineal. Diseñada para pantallas táctiles industriales y manos con guantes, no para ratón de oficina. Si el control es pequeño, el operario falla y deja de registrar. <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/docs/adr/004-ux-tunnel-vision.md" target="_blank" style="color:var(--orange)">ADR →</a></p></div>
         <div class="fi"><span class="ficon">🗄️</span><h3>PostgreSQL 16 + Prisma</h3><p>Soft deletes, optimistic locking y transacciones atómicas multi-paso. Índices compuestos para las queries de planta. La BD es la única fuente de verdad del aislamiento.</p></div>
         <div class="fi"><span class="ficon">📊</span><h3>OEE y coste por orden reales</h3><p>Disponibilidad, rendimiento y calidad calculados por línea y turno en planta, no estimados en papel. Material + mano de obra + energía registrados por orden en origen.</p></div>
@@ -190,7 +190,7 @@
         <div class="fi"><h3>📴 IndexedDB + outbox en vez de PWA estándar</h3><p>El Service Worker cachea assets pero no resuelve la escritura transaccional offline. Con Dexie + outbox el operario sigue trabajando sin red y la UI nunca bloquea por red. Trade-off: complejidad de sincronización e idempotency keys. <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/docs/adr/003-offline-first-dexie.md" target="_blank" style="color:var(--orange)">ADR →</a></p></div>
         <div class="fi"><h3>🧤 UX tunnel vision para la mano, no el ratón</h3><p>Poca información por pantalla, 64px mínimo, contraste alto. La interfaz se diseñó para el operario con guantes en una pantalla industrial: si algo se puede hacer en dos clics en lugar de cinco, eso ya es una mejora sustancial. <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/docs/adr/004-ux-tunnel-vision.md" target="_blank" style="color:var(--orange)">ADR →</a></p></div>
         <div class="fi"><h3>🔄 BullMQ en vez de polling</h3><p>El polling gasta batería y red. La cola durable garantiza que ninguna mutación se pierde aunque el cliente esté offline días. Retry exponencial, dead-letter y observabilidad real por cola.</p></div>
-        <div class="fi"><h3>🧪 Testing como red de seguridad</h3><p>Si no testeas el aislamiento multi-tenant, no tienes multi-tenant. ~208 tests verifican comportamiento: aislamiento cross-tenant, cálculos OEE, sync offline, auth flows. Con Testcontainers, la CI usa PostgreSQL y Redis reales.</p></div>
+        <div class="fi"><h3>🧪 Testing como red de seguridad</h3><p>Si no testeas el aislamiento multi-tenant, no tienes multi-tenant. 234 tests verifican comportamiento: aislamiento cross-tenant, cálculos OEE, sync offline, auth flows. Con Testcontainers, la CI usa PostgreSQL y Redis reales.</p></div>
         <div class="fi"><h3>📋 Decisiones documentadas</h3><p>En 6 meses no recordarás por qué elegiste RLS sobre schema-per-tenant. Los ADRs convierten decisiones tribales en conocimiento transferible. Es como trabajan los equipos de ingeniería maduros. <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/tree/main/docs/adr" target="_blank" style="color:var(--orange)">Ver ADRs →</a></p></div>
       </div>
     </div>
@@ -202,7 +202,7 @@
       <span class="sl">Stack tecnológico</span>
       <h2 class="st">Arquitectura real, no mockups</h2>
       <div class="tc">
-        <div class="card"><h3>🔙 Backend</h3><div class="sg"><span class="stg">TypeScript</span><span class="stg">NestJS 11</span><span class="stg">Fastify</span><span class="stg">Prisma</span><span class="stg">PostgreSQL 16</span><span class="stg">Redis</span><span class="stg">BullMQ</span><span class="stg">Zod</span><span class="stg">JWT + RLS</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>13 módulos NestJS + guards globales</li><li>Multi-tenant con Row Level Security</li><li>Colas duras con retry y dead-letter</li><li>API OpenAPI 3.1 documentada</li></ul></div>
+        <div class="card"><h3>🔙 Backend</h3><div class="sg"><span class="stg">TypeScript</span><span class="stg">NestJS 11</span><span class="stg">Fastify</span><span class="stg">Prisma</span><span class="stg">PostgreSQL 16</span><span class="stg">Redis</span><span class="stg">BullMQ</span><span class="stg">Zod</span><span class="stg">JWT + RLS</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>17 módulos NestJS + guards globales</li><li>Multi-tenant con Row Level Security</li><li>Colas duras con retry y dead-letter</li><li>API OpenAPI 3.1 documentada</li></ul></div>
         <div class="card"><h3>🎨 Frontend</h3><div class="sg"><span class="stg">React 19</span><span class="stg">Vite</span><span class="stg">TanStack Query</span><span class="stg">Tailwind</span><span class="stg">Dexie.js</span><span class="stg">Vitest</span><span class="stg">Playwright</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>Offline-first con IndexedDB local</li><li>Optimistic updates, la UI nunca bloquea</li><li>UI 64px para manos con guantes</li><li>Tests de componentes + e2e Playwright</li></ul></div>
       </div>
       <div class="card" style="margin-top:2rem">
@@ -227,9 +227,9 @@
         <div class="rmc">
           <h4><span style="color:var(--green)">✔</span> Implementado y verificable en repo</h4>
           <div class="rmi"><span class="ck">✔</span> Multi-tenant con RLS + tests de aislamiento cross-tenant</div>
-          <div class="rmi"><span class="ck">✔</span> Backend NestJS (13 módulos) con auth, tenant context, OpenAPI</div>
+          <div class="rmi"><span class="ck">✔</span> Backend NestJS (17 módulos) con auth, tenant context, OpenAPI</div>
           <div class="rmi"><span class="ck">✔</span> Offline-first operativo (Dexie/IndexedDB + sync BullMQ)</div>
-          <div class="rmi"><span class="ck">✔</span> ~208 tests backend (unit + integración + e2e con Testcontainers)</div>
+          <div class="rmi"><span class="ck">✔</span> 234 tests backend (unit + integración + e2e con Testcontainers)</div>
           <div class="rmi"><span class="ck">✔</span> 5 ADRs documentados con alternativas evaluadas</div>
           <div class="rmi"><span class="ck">✔</span> Docker multi-stage + K8s manifests + GitHub Actions CI/CD</div>
           <div class="rmi"><span class="ck">✔</span> Frontend React + optimistic updates + demo desplegada</div>
