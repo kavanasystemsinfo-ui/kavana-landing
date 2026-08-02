@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora Kavana: Eficiencia de Producción — Proyecto Portfolio</title>
+  <meta name="description" content="Proyecto portfolio: PWA offline-first para calcular la eficiencia de líneas de producción industrial. Vanilla JS sin dependencias, 34 tests, 9 ADRs. Nacida del suelo de fábrica." />
+  <meta name="dateModified" content="2026-08-02" />
+  <link rel="canonical" href="https://www.kavanasystems.com/calculadora/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0a0a0f;color:#f0f0f5;line-height:1.7;-webkit-font-smoothing:antialiased}
+    :root{--bg:#0a0a0f;--bg2:#111118;--card:#16161f;--border:#232333;--text2:#9090a8;--muted:#606078;--blue:#6dc7fe;--blue2:#5ab8f0;--blue-s:rgba(109,199,254,0.12);--green:#22c55e;--amber:#f59e0b;--radius:12px;--rsm:8px;--mono:'JetBrains Mono',monospace}
+    .w{max-width:900px;margin:0 auto;padding:0 2rem}
+    section{padding:5rem 0}
+    .sl{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--blue);text-transform:uppercase;letter-spacing:.15em;margin-bottom:.75rem;display:block}
+    .st{font-size:2rem;font-weight:800;letter-spacing:-.03em;margin-bottom:1rem}
+    .ss{color:var(--text2);font-size:1rem;max-width:60ch}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;transition:border-color .2s}
+    .card:hover{border-color:#333350}
+    .b1{display:inline-block;background:var(--blue);color:#08111a;font-weight:700;padding:.75rem 1.5rem;border-radius:var(--rsm);text-decoration:none;font-size:.95rem}
+    .b1:hover{background:var(--blue2)}
+    .b2{display:inline-block;border:1px solid var(--border);color:var(--text2);font-weight:600;padding:.75rem 1.5rem;border-radius:var(--rsm);text-decoration:none;font-size:.95rem}
+    .b2:hover{color:var(--text);border-color:#333350}
+    .tc{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
+    .fi{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}
+    .fi h3{font-size:1.05rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+    .fi p{color:var(--text2);font-size:.9rem}
+    .ficon{font-size:1.3rem}
+    .mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:2rem}
+    .mc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;text-align:center}
+    .mv{font-size:2.2rem;font-weight:800;color:var(--blue);letter-spacing:-.03em}
+    .ml{font-size:.85rem;color:var(--text2);margin-top:.25rem}
+    a{color:var(--blue)}
+    code{background:var(--bg);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:.85em}
+    .nav{position:sticky;top:0;background:rgba(10,10,15,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100}
+    .nav .w{display:flex;justify-content:space-between;align-items:center;padding-top:.9rem;padding-bottom:.9rem}
+    .nb{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--text);font-weight:700}
+    .nl{width:28px;height:28px;border-radius:6px}
+    .nav-links{display:flex;gap:1.5rem;list-style:none}
+    .nav-links a{color:var(--text2);text-decoration:none;font-size:.9rem;font-weight:500}
+    .nav-links a:hover{color:var(--text)}
+    .ham{display:none;background:none;border:none;cursor:pointer}
+    .ham span{display:block;width:22px;height:2px;background:var(--text2);margin:4px 0}
+    .links{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem}
+    .hero-badge{font-family:var(--mono);font-size:12px;color:var(--green);letter-spacing:.1em;margin-bottom:1rem;display:block}
+    @media(max-width:700px){.nav-links{display:none;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:var(--bg2);padding:1rem 2rem;border-bottom:1px solid var(--border)}.nav-links.show{display:flex}.ham{display:block}.st{font-size:1.6rem}}
+  </style>
+</head>
+<body>
+
+<nav class="nav"><div class="w">
+  <a href="#inicio" class="nb"><img src="https://www.kavanasystems.com/warehouse/logo.png" alt="Kavana" class="nl"><span>Calculadora Kavana</span></a>
+  <ul class="nav-links">
+    <li><a href="#problema">Origen</a></li>
+    <li><a href="#tech">Capacidades</a></li>
+    <li><a href="#stack">Decisiones</a></li>
+    <li><a href="#flujo">Flujo</a></li>
+    <li><a href="#demo">Demo</a></li>
+  </ul>
+  <button class="ham" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu"><span></span><span></span><span></span></button>
+</div></nav>
+
+<section id="inicio" style="padding-top:4rem"><div class="w">
+  <span class="hero-badge">● Proyecto destacado · Frontend · PWA</span>
+  <h1 class="st" style="font-size:2.6rem">KAVANA Calculadora — eficiencia de producción que funciona donde la fábrica no tiene señal</h1>
+  <p style="color:var(--text2);font-size:1.1rem;max-width:65ch;margin-top:1rem">Durante 8 años trabajé en producción. Sé lo que pasa cuando el ordenador de la línea no tiene red: el parte de eficiencia se apunta en un papel, y el papel se pierde. Esta PWA hace el cálculo en el dispositivo, sin servidor, sin conexión, sin excusas.</p>
+  <p style="color:var(--text2);font-size:.9rem;margin-top:.75rem">Tecnologías: Vanilla JavaScript (ES Modules), localStorage, Service Worker, PWA. </p>
+  <div class="links">
+    <a href="https://kavanasystemsinfo-ui.github.io/CalculadoraKavana/" target="_blank" class="b1">📂 Código en GitHub</a>
+    <a href="#demo" class="b2">Abrir la app →</a>
+  </div>
+</div></section>
+
+<section id="metrics" style="padding-top:0"><div class="w">
+  <div class="mg">
+    <div class="mc"><div class="mv">34</div><div class="ml">Tests (node --test)</div></div>
+    <div class="mc"><div class="mv">0</div><div class="ml">Dependencias de runtime</div></div>
+    <div class="mc"><div class="mv">9</div><div class="ml">ADRs documentados</div></div>
+    <div class="mc"><div class="mv">100%</div><div class="ml">Offline (Service Worker)</div></div>
+  </div>
+</div></section>
+
+<section id="problema"><div class="w">
+  <span class="sl">El origen</span>
+  <h2 class="st">Por qué construí esto</h2>
+  <p class="ss">En fábrica, la eficiencia de un turno se calcula al final de la jornada: piezas producidas frente a tiempo disponible. Con varias líneas, modelos distintos y medidas en metros o piezas, el cálculo manual es lento y propenso a errores. Y el software que lo resuelve suele asumir que en planta hay internet, que no siempre lo hay.</p>
+  <p class="ss" style="margin-top:1rem">Esta aplicación nace de esa realidad: un operario con una tablet industrial, sin red, debe poder anotar producción, ver la eficiencia al instante y guardar el histórico. Todo en el dispositivo, sin backend que dependa de la conexión.</p>
+</div></section>
+
+<section id="tech" style="background:var(--bg2)"><div class="w">
+  <span class="sl">Lo que demuestra</span>
+  <h2 class="st">Capacidades técnicas visibles en este proyecto</h2>
+  <div class="tc" style="margin-top:2rem">
+    <div class="fi"><span class="ficon">📱</span><h3>PWA offline-first real</h3><p>Service Worker con caché de todos los assets (v17). Instalable en el dispositivo, funciona sin conexión, carga en menos de 500ms.</p></div>
+    <div class="fi"><span class="ficon">⚡</span><h3>Zero dependencias</h3><p>Vanilla JavaScript con ES Modules nativos. Sin framework, sin bundler, sin build step: el código que ves es el código que se ejecuta.</p></div>
+    <div class="fi"><span class="ficon">🧮</span><h3>Motor de cálculo puro</h3><p>Eficiencia por tiempo teórico vs turno real, soporte de piezas/hora y metros/hora, desglose de producción y Meta 100% con reparto greedy.</p></div>
+    <div class="fi"><span class="ficon">💾</span><h3>Persistencia localStorage</h3><p>Plantillas de línea, sesiones de producción e histórico completos en el dispositivo, con export/import JSON para migrar entre equipos.</p></div>
+    <div class="fi"><span class="ficon">📊</span><h3>Exportación Excel</h3><p>Genera .xlsx del histórico acumulado con SheetJS, integrable con la oficina de producción sin fricción.</p></div>
+    <div class="fi"><span class="ficon">🎨</span><h3>Temas por línea</h3><p>6 paletas de color para identificar líneas de producción de un vistazo, con anti-FOUC para que el tema se aplique antes de pintar.</p></div>
+  </div>
+</div></section>
+
+<section id="stack"><div class="w">
+  <span class="sl">Criterio aplicado, no solo código</span>
+  <h2 class="st">Decisiones de arquitectura que responden a restricciones reales</h2>
+  <div class="tc" style="margin-top:2rem">
+    <div class="fi"><h3>🔄 Vanilla JS en vez de React</h3><p>Una SPA de lógica acotada no necesita un framework de 100KB. ES Modules nativos dan estructura sin build step. ADR-002. <a href="https://github.com/kavanasystemsinfo-ui/CalculadoraKavana/blob/main/docs/DECISIONES_ESTRATEGICAS.md">ADR →</a></p></div>
+    <div class="fi"><h3>💾 localStorage en vez de IndexedDB</h3><p>Primero fue Dexie/IndexedDB, pero para datos pequeños y uso individual la complejidad no se justificaba. Se migró a localStorage: síncrono, simple, universal. ADR-008. <a href="https://github.com/kavanasystemsinfo-ui/CalculadoraKavana/blob/main/docs/DECISIONES_ESTRATEGICAS.md">ADR →</a></p></div>
+    <div class="fi"><h3>🧩 CustomEvent bus en vez de estado global</h3><p>Los módulos UI se comunican con eventos nativos del navegador, sin librería de estado. Desacoplamiento sin dependencias. ADR-005.</p></div>
+    <div class="fi"><h3>📐 Meta 100% con reparto greedy</h3><p>El objetivo para llegar al 100% se reparte entre los modelos activos con un algoritmo greedy, desglosado en PALETS + FILAS + PAQUETES. ADR-009.</p></div>
+  </div>
+</div></section>
+
+<section id="flujo" style="background:var(--bg2)"><div class="w">
+  <span class="sl">El flujo completo</span>
+  <h2 class="st">Cómo funciona un turno de producción</h2>
+  <div class="card" style="font-family:var(--mono);font-size:.9rem;line-height:2;color:var(--text2);overflow-x:auto;white-space:pre">Operario (tablet industrial, sin red)
+  │  configura la línea con su plantilla
+  ▼
+Calculadora (motor puro en el dispositivo)
+  │  eficiencia en tiempo real · piezas o metros por hora
+  ▼
+localStorage (en el propio dispositivo)
+  │  sesión guardada al instante, sin esperar a nadie
+  ▼
+Historial + Export
+   acumulado del turno · Excel para la oficina · backup JSON</div>
+</div></section>
+
+<section id="demo"><div class="w">
+  <span class="sl">Demo en vivo</span>
+  <h2 class="st">Pruébala ahora</h2>
+  <div class="tc" style="margin-top:2rem">
+    <div class="card" style="text-align:center">
+      <h3 style="justify-content:center;font-size:1.25rem">📱 La app</h3>
+      <p style="color:var(--text2);font-size:.9rem;margin:1rem 0">PWA instalable en el móvil o la tablet. Funciona offline: los datos se guardan en el dispositivo y no dependen de ningún servidor.</p>
+      <a href="https://kavanasystemsinfo-ui.github.io/CalculadoraKavana/" target="_blank" class="b1" style="margin-top:1rem">Abrir la app →</a>
+    </div>
+    <div class="card" style="text-align:center">
+      <h3 style="justify-content:center;font-size:1.25rem">💻 Código + decisiones</h3>
+      <p style="color:var(--text2);font-size:.9rem;margin:1rem 0">Repo público con 34 tests, 9 ADRs y la documentación técnica. Sin build step: clonar y abrir index.html.</p>
+      <a href="https://github.com/kavanasystemsinfo-ui/CalculadoraKavana" target="_blank" class="b1" style="margin-top:1rem">Ver en GitHub →</a>
+    </div>
+  </div>
+</div></section>
+
+<section id="cta" style="padding-top:0;text-align:center"><div class="w">
+  <h2 class="st" style="font-size:1.8rem">¿Quieres ver más?</h2>
+  <p class="ss" style="margin:0 auto 1.5rem">Este es uno de los tres proyectos del portfolio. Cada uno con su problema real, sus decisiones documentadas y su código verificado.</p>
+  <div class="links" style="justify-content:center">
+    <a href="https://github.com/kavanasystemsinfo-ui/CalculadoraKavana" target="_blank" class="b1">📂 Código + ADRs + Docs</a>
+    <a href="https://www.linkedin.com/in/kavanasystems/" target="_blank" class="b2">💼 LinkedIn</a>
+    <a href="https://www.kavanasystems.com/" class="b2">🌐 Más proyectos</a>
+  </div>
+</div></section>
+
+<footer style="border-top:1px solid var(--border);padding:2rem 0;text-align:center;color:var(--muted);font-size:.85rem">
+  <p>© 2026 Kavana Systems — Proyecto portfolio de Jorge Adán Rodríguez</p>
+</footer>
+
+</body>
+</html>
