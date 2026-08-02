@@ -102,6 +102,7 @@
       <li><a href="#origen">Origen</a></li>
       <li><a href="#tech">Capacidades</a></li>
       <li><a href="#stack">Decisiones</a></li>
+      <li><a href="#flujo">Flujo</a></li>
       <li><a href="#demo">Demo</a></li>
     </ul>
     <button class="ham" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -130,12 +131,13 @@
 
   <!-- Metrics -->
   <section style="padding-top:0"><div class="w"><div class="mg">
-    <div class="mc"><div class="mv">234</div><div class="ml">Tests automatizados</div></div>
+    <div class="mc"><div class="mv">233</div><div class="ml">Tests (216 API + 17 frontend)</div></div>
     <div class="mc"><div class="mv">17</div><div class="ml">Módulos NestJS</div></div>
     <div class="mc"><div class="mv">5</div><div class="ml">ADRs documentados</div></div>
     <div class="mc"><div class="mv">RLS</div><div class="ml">Aislamiento multi-tenant</div></div>
   </div>
   <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:1.5rem">
+    <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/DECISIONS.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📐 Decisiones técnicas</a>
     <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/docs/adr/001-shared-schema-multi-tenant-rls.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">🔒 ADR: Multi-tenant RLS</a>
     <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/docs/adr/003-offline-first-dexie.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📴 ADR: Offline-first</a>
     <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/docs/adr/004-ux-tunnel-vision.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">🧤 ADR: UX operario</a>
@@ -167,7 +169,7 @@
         <div class="fi"><span class="ficon">🔒</span><h3>Multi-tenant con RLS</h3><p>Shared schema + Row Level Security en PostgreSQL. El aislamiento lo enforza la base de datos (<code>client_id</code>), imposible de evadir incluso con SQL raw. Verificado con tests cross-tenant. <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/docs/adr/001-shared-schema-multi-tenant-rls.md" target="_blank" style="color:var(--orange)">ADR →</a></p></div>
         <div class="fi"><span class="ficon">📴</span><h3>Offline-first real, no cache-only</h3><p>Dexie.js/IndexedDB como base de datos local completa, no un Service Worker que solo cachea assets. El operario crea órdenes y registra calidad sin red; cada mutación genera un evento en cola local (outbox). <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/docs/adr/003-offline-first-dexie.md" target="_blank" style="color:var(--orange)">ADR →</a></p></div>
         <div class="fi"><span class="ficon">🔄</span><h3>Sync durable con BullMQ</h3><p>Colas Redis (<code>sync:push</code>, <code>sync:pull</code>, <code>analytics:aggregate</code>) con retry exponencial, dead-letter e idempotency keys. Nada se pierde aunque el cliente esté días offline. Métricas Prometheus por cola.</p></div>
-        <div class="fi"><span class="ficon">🧪</span><h3>234 tests backend</h3><p>Unitarios, integración y e2e con Testcontainers (PostgreSQL y Redis reales en CI). Incluye tests de aislamiento multi-tenant, cálculos OEE y transacciones atómicas de stock.</p></div>
+        <div class="fi"><span class="ficon">🧪</span><h3>233 tests (216 backend + 17 frontend)</h3><p>Unitarios, integración y e2e con Testcontainers (PostgreSQL y Redis reales en CI). Incluye tests de aislamiento multi-tenant, cálculos OEE y transacciones atómicas de stock.</p></div>
         <div class="fi"><span class="ficon">🧤</span><h3>UX diseñada para guantes</h3><p>Botones de 64px, contraste alto, flujo lineal. Diseñada para pantallas táctiles industriales y manos con guantes, no para ratón de oficina. Si el control es pequeño, el operario falla y deja de registrar. <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/docs/adr/004-ux-tunnel-vision.md" target="_blank" style="color:var(--orange)">ADR →</a></p></div>
         <div class="fi"><span class="ficon">🗄️</span><h3>PostgreSQL 16 + Prisma</h3><p>Soft deletes, optimistic locking y transacciones atómicas multi-paso. Índices compuestos para las queries de planta. La BD es la única fuente de verdad del aislamiento.</p></div>
         <div class="fi"><span class="ficon">📊</span><h3>OEE y coste por orden reales</h3><p>Disponibilidad, rendimiento y calidad calculados por línea y turno en planta, no estimados en papel. Material + mano de obra + energía registrados por orden en origen.</p></div>
@@ -190,8 +192,8 @@
         <div class="fi"><h3>📴 IndexedDB + outbox en vez de PWA estándar</h3><p>El Service Worker cachea assets pero no resuelve la escritura transaccional offline. Con Dexie + outbox el operario sigue trabajando sin red y la UI nunca bloquea por red. Trade-off: complejidad de sincronización e idempotency keys. <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/docs/adr/003-offline-first-dexie.md" target="_blank" style="color:var(--orange)">ADR →</a></p></div>
         <div class="fi"><h3>🧤 UX tunnel vision para la mano, no el ratón</h3><p>Poca información por pantalla, 64px mínimo, contraste alto. La interfaz se diseñó para el operario con guantes en una pantalla industrial: si algo se puede hacer en dos clics en lugar de cinco, eso ya es una mejora sustancial. <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/docs/adr/004-ux-tunnel-vision.md" target="_blank" style="color:var(--orange)">ADR →</a></p></div>
         <div class="fi"><h3>🔄 BullMQ en vez de polling</h3><p>El polling gasta batería y red. La cola durable garantiza que ninguna mutación se pierde aunque el cliente esté offline días. Retry exponencial, dead-letter y observabilidad real por cola.</p></div>
-        <div class="fi"><h3>🧪 Testing como red de seguridad</h3><p>Si no testeas el aislamiento multi-tenant, no tienes multi-tenant. 234 tests verifican comportamiento: aislamiento cross-tenant, cálculos OEE, sync offline, auth flows. Con Testcontainers, la CI usa PostgreSQL y Redis reales.</p></div>
-        <div class="fi"><h3>📋 Decisiones documentadas</h3><p>En 6 meses no recordarás por qué elegiste RLS sobre schema-per-tenant. Los ADRs convierten decisiones tribales en conocimiento transferible. Es como trabajan los equipos de ingeniería maduros. <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/tree/main/docs/adr" target="_blank" style="color:var(--orange)">Ver ADRs →</a></p></div>
+        <div class="fi"><h3>🧪 Testing como red de seguridad</h3><p>Si no testeas el aislamiento multi-tenant, no tienes multi-tenant. 233 tests (216 backend + 17 frontend) verifican comportamiento: aislamiento cross-tenant, cálculos OEE, sync offline, auth flows. Con Testcontainers, la CI usa PostgreSQL y Redis reales.</p></div>
+        <div class="fi"><h3>📋 Decisiones documentadas</h3><p>En 6 meses no recordarás por qué elegiste RLS sobre schema-per-tenant. Los 5 ADRs y el <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/DECISIONS.md" target="_blank" style="color:var(--orange)">DECISIONS.md</a> convierten decisiones tribales en conocimiento transferible. Es como trabajan los equipos de ingeniería maduros. <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/tree/main/docs/adr" target="_blank" style="color:var(--orange)">Ver ADRs →</a></p></div>
       </div>
     </div>
   </section>
@@ -210,10 +212,36 @@
         <div class="sg"><span class="stg">Docker</span><span class="stg">Kubernetes</span><span class="stg">GitHub Actions</span><span class="stg">Vercel</span><span class="stg">Render</span><span class="stg">Neon</span><span class="stg">OpenTelemetry</span><span class="stg">Prometheus</span></div>
         <div style="margin-top:1rem;font-size:.85rem;color:var(--text2);border-top:1px solid var(--border);padding-top:1rem">
           📚 <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/README.md" target="_blank" style="color:var(--orange);text-decoration:none;font-weight:600">README completo</a>
+          · <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/blob/main/DECISIONS.md" target="_blank" style="color:var(--orange);text-decoration:none;font-weight:600">DECISIONS.md</a>
           · <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing/tree/main/docs/adr" target="_blank" style="color:var(--orange);text-decoration:none;font-weight:600">ADRs (5 documentos)</a>
           · <a href="https://github.com/kavanasystemsinfo-ui/kavana-manufacturing" target="_blank" style="color:var(--orange);text-decoration:none;font-weight:600">Repositorio</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Flujo -->
+  <section id="flujo" style="background:var(--bg2)">
+    <div class="w">
+      <span class="sl">El flujo completo</span>
+      <h2 class="st">Cómo circula una orden en planta</h2>
+      <div class="card" style="font-family:var(--mono);font-size:.9rem;line-height:2;color:var(--text2);overflow-x:auto;white-space:pre">Operario (HMI táctil, sin red)
+  │  crea orden · registra calidad · mermas · tiempos
+  ▼
+IndexedDB local (Dexie.js) + outbox
+  │  trabaja offline, la UI nunca bloquea
+  ▼
+Sync BullMQ (Redis)
+  │  retry exponencial · dead-letter · idempotency keys
+  ▼
+API REST (NestJS + RLS)
+  │  valida tenant y solapamientos de bloques
+  ▼
+PostgreSQL 16 (shared schema, aislamiento por fila)
+  │
+  ▼
+Oficina (dashboard)
+   OEE por línea · coste por orden · calidad · incidencias</div>
     </div>
   </section>
 
@@ -229,8 +257,8 @@
           <div class="rmi"><span class="ck">✔</span> Multi-tenant con RLS + tests de aislamiento cross-tenant</div>
           <div class="rmi"><span class="ck">✔</span> Backend NestJS (17 módulos) con auth, tenant context, OpenAPI</div>
           <div class="rmi"><span class="ck">✔</span> Offline-first operativo (Dexie/IndexedDB + sync BullMQ)</div>
-          <div class="rmi"><span class="ck">✔</span> 234 tests backend (unit + integración + e2e con Testcontainers)</div>
-          <div class="rmi"><span class="ck">✔</span> 5 ADRs documentados con alternativas evaluadas</div>
+          <div class="rmi"><span class="ck">✔</span> 233 tests (216 backend + 17 frontend) con Testcontainers</div>
+          <div class="rmi"><span class="ck">✔</span> 5 ADRs documentados con alternativas evaluadas + DECISIONS.md</div>
           <div class="rmi"><span class="ck">✔</span> Docker multi-stage + K8s manifests + GitHub Actions CI/CD</div>
           <div class="rmi"><span class="ck">✔</span> Frontend React + optimistic updates + demo desplegada</div>
         </div>
