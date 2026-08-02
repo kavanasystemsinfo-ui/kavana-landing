@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kavana Warehouse: WMS Multi-Tenant — Proyecto Portfolio Full-Stack</title>
-  <meta name="description" content="Proyecto portfolio de full-stack: sistema de gestión de almacenes (WMS) multi-tenant construido para resolver un problema real de una empresa de limpieza. React 19, Node.js + Express, PostgreSQL 16, Docker." />
+  <meta name="description" content="Proyecto portfolio de full-stack: sistema de gestión de inventario multi-tenant construido para resolver un problema real de una empresa de limpieza. React 19, Node.js + Express, PostgreSQL 16, Docker." />
   <link rel="canonical" href="https://www.kavanasystems.com/warehouse/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -59,6 +59,11 @@
     .mc{text-align:center;padding:2rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
     .mv{font-size:2.5rem;font-weight:900;color:var(--blue);letter-spacing:-.03em}
     .ml{font-size:.8rem;color:var(--muted);margin-top:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+    .fs{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+    .fstep{display:flex;align-items:flex-start;gap:1.25rem;padding:1.25rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+    .fsn{width:36px;height:36px;border-radius:50%;background:var(--blue);color:#0a0a0f;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+    .fsc h4{font-size:.95rem;font-weight:700;margin-bottom:.25rem}
+    .fsc p{font-size:.85rem;color:var(--text2);margin:0}
     .prose{font-size:1.05rem;color:var(--text2);line-height:1.8;max-width:720px}
     .prose p{margin-bottom:1.25rem}
     .prose strong{color:#f0f0f5}
@@ -90,9 +95,10 @@
   <nav>
     <a href="#inicio" class="nb"><img src="logo.png?v=2" alt="Kavana" class="nl"><span>Kavana Warehouse</span></a>
     <ul class="nav-links">
-      <li><a href="#origen">Origen</a></li>
+      <li><a href="#problema">Origen</a></li>
       <li><a href="#tech">Capacidades</a></li>
       <li><a href="#stack">Decisiones</a></li>
+      <li><a href="#flujo">Flujo</a></li>
       <li><a href="#demo">Demo</a></li>
     </ul>
     <button class="ham" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -108,7 +114,7 @@
         </p>
         <h1 style="font-size:clamp(2.25rem,5vw,3.5rem);font-weight:900;letter-spacing:-.04em;line-height:1.1;margin-bottom:1.5rem">KAVANA Warehouse — WMS <span style="background:linear-gradient(135deg,#6dc7fe,#22c55e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">multi-tenant</span> diseñado para un problema real de inventario</h1>
         <div class="prose" style="margin-top:1.5rem;font-size:1.15rem">
-          <p><strong>Proyecto portfolio de full-stack.</strong> Mi cuñado no sabía cuánto producto gastaba cada centro. Cada semana compraba de más o de menos. Le dije que iba a hacer algo sencillo para llevar la cuenta. Eso fue el inicio de Kawana Warehouse.</p>
+          <p><strong>Proyecto portfolio de full-stack.</strong> Mi cuñado no sabía cuánto producto gastaba cada centro de su empresa de limpieza. Cada semana compraba de más o de menos. Le dije que iba a hacer algo sencillo para llevar la cuenta. Eso fue el inicio de Kavana Warehouse.</p>
           <p>Tecnologías: React 19, Node.js + Express, PostgreSQL 16, Prisma, Docker. <a href="#stack" style="color:var(--blue)">Ver arquitectura completa →</a></p>
         </div>
         <div class="ca" style="margin-top:2rem;justify-content:flex-start">
@@ -121,25 +127,25 @@
 
   <!-- Metrics -->
   <section style="padding-top:0"><div class="w"><div class="mg">
-    <div class="mc"><div class="mv">35</div><div class="ml">Tests automatizados</div></div>
+    <div class="mc"><div class="mv">38</div><div class="ml">Tests API (Jest)</div></div>
+    <div class="mc"><div class="mv">44</div><div class="ml">Endpoints API</div></div>
+    <div class="mc"><div class="mv">4</div><div class="ml">ADRs documentados</div></div>
     <div class="mc"><div class="mv">31.000+</div><div class="ml">Movimientos simulados</div></div>
-    <div class="mc"><div class="mv">1</div><div class="ml">ADR documentado</div></div>
-    <div class="mc"><div class="mv">RBAC</div><div class="ml">Control de acceso</div></div>
   </div>
   <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:1.5rem">
-    <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📋 ADR: Multi-tenant + Feature flags</a>
-    <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">🐳 Docker Compose</a>
+    <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/DECISIONS.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📐 Decisiones técnicas</a>
+    <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/tree/main/docs/adr" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📋 ADRs (4)</a>
+    <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/README.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📚 README</a>
   </div>
   </div></section>
 
-  <!-- Origen -->
-  <section id="origen" style="background:var(--bg2)">
+  <!-- Problema -->
+  <section id="problema" style="background:var(--bg2)">
     <div class="w">
       <span class="sl">El origen</span>
       <h2 class="st">Por qué construí esto</h2>
       <div class="prose">
         <p>Mi cuñado es el responsable de una empresa de limpieza que gestiona varios centros de trabajo. Un día me comentó que no sabía cuánto producto gastaba cada centro: cada semana compraba de más o de menos, y nadie tenía una foto clara del stock real. Me pidió una forma de llevar la cuenta sin depender de que cada trabajador avisara desde su móvil.</p>
-        <p>Me preguntó qué herramientas usaba yo para construir mis proyectos. Le hablé de OpenCode y Antigravity. Intentó hacerlo él mismo, pero no tenía los conocimientos necesarios para llevarlo a cabo.</p>
         <p><strong>Así nació Kavana Warehouse.</strong> Lo construí como proyecto personal, pensando exclusivamente en su problema. Podría usarse en cualquier sector, pero lo diseñé a medida para esa empresa de limpieza. Quise demostrar que podemos crear soluciones específicas, pegadas a un cliente real, y no productos genéricos que intentan servir para todo. Esa es la mentalidad de producto que quiero mostrar con este proyecto.</p>
       </div>
     </div>
@@ -151,7 +157,7 @@
       <span class="sl">Lo que demuestra</span>
       <h2 class="st">Capacidades técnicas visibles en este proyecto</h2>
       <div class="fg">
-        <div class="fi"><span class="ficon">🏗️</span><h3>API REST con Express + Prisma</h3><p>Backend en Node.js 20 con Express y Prisma ORM. Endpoints para productos, centros, inventarios, movimientos y costes. Respuestas tipadas de extremo a extremo.</p></div>
+        <div class="fi"><span class="ficon">🏗️</span><h3>API REST con Express + Prisma</h3><p>Backend en Node.js 20 con Express y Prisma ORM. 44 endpoints para productos, centros, inventarios, movimientos y costes. Respuestas tipadas de extremo a extremo.</p></div>
         <div class="fi"><span class="ficon">🔒</span><h3>Multi-tenant shared schema</h3><p>Aislamiento lógico por <code>client_id</code> en PostgreSQL 16. Todos los tenants comparten esquema pero los datos están separados a nivel de aplicación. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--blue)">ADR →</a></p></div>
         <div class="fi"><span class="ficon">👥</span><h3>Auth JWT + RBAC</h3><p>Autenticación stateless con JWT + refresh tokens. Dos roles: <code>oficina</code> (gestión total) y <code>supervisor</code> (recuento de inventario). El usuario se identifica con nombre de usuario, no con email.</p></div>
         <div class="fi"><span class="ficon">🐳</span><h3>Docker Compose</h3><p>PostgreSQL, API y dashboard como servicios orquestados con docker-compose. Entorno replicable con un comando.</p></div>
@@ -159,8 +165,8 @@
         <div class="fi"><span class="ficon">📊</span><h3>Dashboard con KPIs</h3><p>Vista operativa con métricas de consumo, evolución mensual, alertas de stock bajo y control de presupuesto por centro.</p></div>
         <div class="fi"><span class="ficon">📋</span><h3>Trazabilidad completa</h3><p>Registro histórico de todos los movimientos con filtros por fecha, centro, producto y usuario. Nada desaparece sin dejar rastro.</p></div>
         <div class="fi"><span class="ficon">🔗</span><h3>API REST documentada</h3><p>API diseñada para integraciones con ERPs o sistemas externos. Documentación técnica de endpoints disponible en el repositorio.</p></div>
-        <div class="fi"><span class="ficon">🧪</span><h3>35 tests automatizados</h3><p>Tests de integración con el stack real (supertest + PostgreSQL). Ejecutables en local con <code>npm test</code> y en CI con GitHub Actions.</p></div>
-        <div class="fi"><span class="ficon">📋</span><h3>1 ADR documentado</h3><p>La decisión de multi-tenant con feature flags está documentada con contexto, alternativas y consecuencias. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--blue)">Ver ADR →</a></p></div>
+        <div class="fi"><span class="ficon">🧪</span><h3>38 tests de API + 3 de frontend</h3><p>38 tests de integración con el stack real (supertest + PostgreSQL), incluido el flujo completo conteo → desviación → propuesta de compra. 3 tests de componente con Vitest + Testing Library. Ejecutables con <code>npm test</code> y en CI con GitHub Actions.</p></div>
+        <div class="fi"><span class="ficon">📋</span><h3>4 ADRs documentados</h3><p>Multi-tenant, JWT + refresh tokens, Prisma ORM y despliegue Vercel+Render+Neon, cada uno con contexto, alternativas y consecuencias. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/DECISIONS.md" target="_blank" style="color:var(--blue)">Decisiones técnicas →</a></p></div>
       </div>
     </div>
   </section>
@@ -178,8 +184,8 @@
         <div class="fi"><h3>👤 JWT + RBAC en vez de sessions</h3><p>Arquitectura stateless: sin estado en servidor, escalable horizontalmente. Refresh tokens para no pedir login cada 15 minutos. Dos roles: <code>oficina</code> (gestión total) y <code>supervisor</code> (recuento de inventario).</p></div>
         <div class="fi"><h3>🐳 Docker Compose</h3><p>PostgreSQL, API y dashboard separados como contenedores con docker-compose. Un comando levanta todo el stack en local.</p></div>
         <div class="fi"><h3>🗄️ Prisma ORM en vez de SQL raw</h3><p>Schemas declarativos, migraciones automáticas y type-safety desde la BD hasta el frontend. Menos errores, más velocidad de iteración.</p></div>
-        <div class="fi"><h3>👤 Dos roles, no cuatro</h3><p>Primero diseñamos roles para controlar al personal (limpiadores, operarios), pero la app evolucionó a gestión de stock pura. Se simplificó: <code>oficina</code> lo gestiona todo y <code>supervisor</code> hace el recuento de inventario. Menos roles, menos fricción, más foco en el problema real.</p></div>
-        <div class="fi"><h3>📋 Decisiones documentadas</h3><p>La arquitectura multi-tenant con feature flags está documentada en un ADR: qué problema resuelve, qué alternativas se consideraron y por qué se tomó esa decisión. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--blue)">Ver ADR →</a></p></div>
+        <div class="fi"><h3>👤 Dos roles, no cuatro</h3><p>Primero se diseñaron roles para controlar al personal (limpiadores, operarios), pero la app evolucionó a gestión de stock pura. Se simplificó: <code>oficina</code> lo gestiona todo y <code>supervisor</code> hace el recuento de inventario. Menos roles, menos fricción, más foco en el problema real.</p></div>
+        <div class="fi"><h3>📋 Decisiones documentadas</h3><p>La arquitectura multi-tenant, la autenticación JWT, la elección de Prisma y el despliegue están documentados en 4 ADRs con contexto, alternativas y consecuencias, consolidados en <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/DECISIONS.md" target="_blank" style="color:var(--blue)">DECISIONS.md</a>.</p></div>
       </div>
     </div>
   </section>
@@ -202,6 +208,28 @@
           · <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse" target="_blank" style="color:var(--blue);text-decoration:none;font-weight:600">Repositorio</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Flujo -->
+  <section id="flujo" style="background:var(--bg2)">
+    <div class="w">
+      <span class="sl">El flujo completo</span>
+      <h2 class="st">Cómo circula el inventario</h2>
+      <div class="card" style="font-family:var(--mono);font-size:.9rem;line-height:2;color:var(--text2);overflow-x:auto;white-space:pre">Oficina
+  │  gestiona productos, centros y presupuestos
+  ▼
+API REST (Express + Prisma + JWT)
+  │  valida rol y aisla datos por client_id
+  ▼
+PostgreSQL 16 (Neon)
+  │
+  ▼
+Supervisor (dashboard)
+  │  registra consumos y recuentos físicos
+  ▼
+Dashboard
+   desviaciones · alertas de stock bajo · coste por centro</div>
     </div>
   </section>
 
