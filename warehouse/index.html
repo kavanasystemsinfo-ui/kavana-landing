@@ -100,6 +100,7 @@
       <li><a href="#tech">Capacidades</a></li>
       <li><a href="#stack">Decisiones</a></li>
       <li><a href="#flujo">Flujo</a></li>
+      <li><a href="#capturas">Capturas</a></li>
       <li><a href="#demo">Demo</a></li>
     </ul>
     <button class="ham" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -231,6 +232,42 @@ Supervisor (dashboard)
   ▼
 Dashboard
    desviaciones · alertas de stock bajo · coste por centro</div>
+    </div>
+  </section>
+
+  <!-- Capturas reales -->
+  <section id="capturas">
+    <div class="w">
+      <span class="sl">Capturas reales</span>
+      <h2 class="st">La aplicación funcionando, no mockups</h2>
+      <p class="ss">Capturas de la demo desplegada: cada pantalla corresponde al código real del repositorio.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.25rem;margin-top:2rem">
+        <a href="https://warehouse.kavanasystems.com/" target="_blank" class="card" style="text-decoration:none;display:block;padding:0;overflow:hidden">
+          <img src="screenshots/dashboard.jpg" alt="Dashboard con KPIs" style="width:100%;display:block;border-bottom:1px solid var(--border)">
+          <div style="padding:1rem"><h3 style="font-size:.95rem;margin:0">📊 Dashboard</h3><p style="font-size:.85rem;color:var(--text2);margin:.35rem 0 0">KPIs, evolución mensual y alertas de stock bajo.</p></div>
+        </a>
+        <a href="https://warehouse.kavanasystems.com/" target="_blank" class="card" style="text-decoration:none;display:block;padding:0;overflow:hidden">
+          <img src="screenshots/costes.jpg" alt="Coste por centro" style="width:100%;display:block;border-bottom:1px solid var(--border)">
+          <div style="padding:1rem"><h3 style="font-size:.95rem;margin:0">💰 Costes por centro</h3><p style="font-size:.85rem;color:var(--text2);margin:.35rem 0 0">Presupuesto mensual, porcentaje consumido y estado por centro.</p></div>
+        </a>
+        <a href="https://warehouse.kavanasystems.com/" target="_blank" class="card" style="text-decoration:none;display:block;padding:0;overflow:hidden">
+          <img src="screenshots/desviaciones.jpg" alt="Desviaciones de inventario" style="width:100%;display:block;border-bottom:1px solid var(--border)">
+          <div style="padding:1rem"><h3 style="font-size:.95rem;margin:0">📉 Desviaciones</h3><p style="font-size:.85rem;color:var(--text2);margin:.35rem 0 0">Stock registrado vs conteo físico, mermas y coste de la desviación.</p></div>
+        </a>
+        <a href="https://warehouse.kavanasystems.com/" target="_blank" class="card" style="text-decoration:none;display:block;padding:0;overflow:hidden">
+          <img src="screenshots/inventario.jpg" alt="Inventario multi-centro" style="width:100%;display:block;border-bottom:1px solid var(--border)">
+          <div style="padding:1rem"><h3 style="font-size:.95rem;margin:0">📦 Inventario</h3><p style="font-size:.85rem;color:var(--text2);margin:.35rem 0 0">Stock por centro y producto, mínimos y propuesta de compra.</p></div>
+        </a>
+        <a href="https://warehouse.kavanasystems.com/" target="_blank" class="card" style="text-decoration:none;display:block;padding:0;overflow:hidden">
+          <img src="screenshots/centros.jpg" alt="Gestión de centros" style="width:100%;display:block;border-bottom:1px solid var(--border)">
+          <div style="padding:1rem"><h3 style="font-size:.95rem;margin:0">🏢 Centros</h3><p style="font-size:.85rem;color:var(--text2);margin:.35rem 0 0">Cada centro con su presupuesto, productos asociados y responsables.</p></div>
+        </a>
+        <a href="https://warehouse.kavanasystems.com/" target="_blank" class="card" style="text-decoration:none;display:block;padding:0;overflow:hidden">
+          <img src="screenshots/login.jpg" alt="Pantalla de login" style="width:100%;display:block;border-bottom:1px solid var(--border)">
+          <div style="padding:1rem"><h3 style="font-size:.95rem;margin:0">🔐 Login</h3><p style="font-size:.85rem;color:var(--text2);margin:.35rem 0 0">Acceso por nombre de usuario con JWT + refresh tokens.</p></div>
+        </a>
+      </div>
+      <p style="text-align:center;margin-top:1.5rem;font-size:.9rem;color:var(--muted)">Todas las capturas son de la demo desplegada: <a href="https://warehouse.kavanasystems.com/" target="_blank" style="color:var(--blue)">warehouse.kavanasystems.com</a> · usuario <code style="background:var(--bg);padding:2px 6px;border-radius:4px">warehouse</code> · <code style="background:var(--bg);padding:2px 6px;border-radius:4px">kavana</code></p>
     </div>
   </section>
 
