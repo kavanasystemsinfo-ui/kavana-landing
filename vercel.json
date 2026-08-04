@@ -3,6 +3,7 @@
     { "source": "/", "destination": "/index.html" },
     { "source": "/manufacturing", "destination": "/manufacturing/index.html" },
     { "source": "/warehouse", "destination": "/warehouse/index.html" },
-    { "source": "/routeai", "destination": "/routeai/index.html" }
+    { "source": "/routeai", "destination": "/routeai/index.html" },
+    { "source": "/busroad", "destination": "/busroad/index.html" }
   ]
 }

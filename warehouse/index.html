@@ -129,14 +129,14 @@
 
   <!-- Metrics -->
   <section style="padding-top:0"><div class="w"><div class="mg">
-    <div class="mc"><div class="mv">38</div><div class="ml">Tests API (Jest)</div></div>
-    <div class="mc"><div class="mv">44</div><div class="ml">Endpoints API</div></div>
-    <div class="mc"><div class="mv">4</div><div class="ml">ADRs documentados</div></div>
+    <div class="mc"><div class="mv">45</div><div class="ml">Tests API (Jest)</div></div>
+    <div class="mc"><div class="mv">45</div><div class="ml">Endpoints API</div></div>
+    <div class="mc"><div class="mv">5</div><div class="ml">ADRs documentados</div></div>
     <div class="mc"><div class="mv">31.000+</div><div class="ml">Movimientos simulados</div></div>
   </div>
   <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:1.5rem">
     <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/DECISIONS.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📐 Decisiones técnicas</a>
-    <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/tree/main/docs/adr" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📋 ADRs (4)</a>
+    <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/tree/main/docs/adr" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📋 ADRs (5)</a>
     <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/README.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📚 README</a>
   </div>
   </div></section>
@@ -159,7 +159,7 @@
       <span class="sl">Lo que demuestra</span>
       <h2 class="st">Capacidades técnicas visibles en este proyecto</h2>
       <div class="fg">
-        <div class="fi"><span class="ficon">🏗️</span><h3>API REST con Express + Prisma</h3><p>Backend en Node.js 20 con Express y Prisma ORM. 44 endpoints para productos, centros, inventarios, movimientos y costes. Respuestas tipadas de extremo a extremo.</p></div>
+        <div class="fi"><span class="ficon">🏗️</span><h3>API REST con Express + Prisma</h3><p>Backend en Node.js 20 con Express y Prisma ORM. 45 endpoints para productos, centros, inventarios, movimientos, costes y el asistente técnico. Respuestas tipadas de extremo a extremo.</p></div>
         <div class="fi"><span class="ficon">🔒</span><h3>Multi-tenant shared schema</h3><p>Aislamiento lógico por <code>client_id</code> en PostgreSQL 16. Todos los tenants comparten esquema pero los datos están separados a nivel de aplicación. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/docs/adr/001-multi-tenant-feature-flags.md" target="_blank" style="color:var(--blue)">ADR →</a></p></div>
         <div class="fi"><span class="ficon">👥</span><h3>Auth JWT + RBAC</h3><p>Autenticación stateless con JWT + refresh tokens. Dos roles: <code>oficina</code> (gestión total) y <code>supervisor</code> (recuento de inventario). El usuario se identifica con nombre de usuario, no con email.</p></div>
         <div class="fi"><span class="ficon">🐳</span><h3>Docker Compose</h3><p>PostgreSQL, API y dashboard como servicios orquestados con docker-compose. Entorno replicable con un comando.</p></div>
@@ -167,8 +167,10 @@
         <div class="fi"><span class="ficon">📊</span><h3>Dashboard con KPIs</h3><p>Vista operativa con métricas de consumo, evolución mensual, alertas de stock bajo y control de presupuesto por centro.</p></div>
         <div class="fi"><span class="ficon">📋</span><h3>Trazabilidad completa</h3><p>Registro histórico de todos los movimientos con filtros por fecha, centro, producto y usuario. Nada desaparece sin dejar rastro.</p></div>
         <div class="fi"><span class="ficon">🔗</span><h3>API REST documentada</h3><p>API diseñada para integraciones con ERPs o sistemas externos. Documentación técnica de endpoints disponible en el repositorio.</p></div>
-        <div class="fi"><span class="ficon">🧪</span><h3>38 tests de API + 3 de frontend</h3><p>38 tests de integración con el stack real (supertest + PostgreSQL), incluido el flujo completo conteo → desviación → propuesta de compra. 3 tests de componente con Vitest + Testing Library. Ejecutables con <code>npm test</code> y en CI con GitHub Actions.</p></div>
-        <div class="fi"><span class="ficon">📋</span><h3>4 ADRs documentados</h3><p>Multi-tenant, JWT + refresh tokens, Prisma ORM y despliegue Vercel+Render+Neon, cada uno con contexto, alternativas y consecuencias. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/DECISIONS.md" target="_blank" style="color:var(--blue)">Decisiones técnicas →</a></p></div>
+        <div class="fi"><span class="ficon">🧪</span><h3>45 tests de API + 3 de frontend</h3><p>45 tests de integración con el stack real (supertest + PostgreSQL), incluido el flujo completo conteo → desviación → propuesta de compra y el asistente técnico. 3 tests de componente con Vitest + Testing Library. Ejecutables con <code>npm test</code> y en CI con GitHub Actions.</p></div>
+        <div class="fi"><span class="ficon">🤖</span><h3>Asistente técnico RAG</h3><p>Chat que responde sobre la documentación real del proyecto: README, DECISIONS.md, ADRs y código. Indexa los documentos con búsqueda por similitud y genera respuestas con modelos de IA, con límite de uso por IP para proteger la demo.</p></div>
+        <div class="fi"><span class="ficon">🛡️</span><h3>Blindaje de demo (modo solo lectura)</h3><p>Los supervisores de visita solo pueden consultar y crear recuentos; la gestión global devuelve 403. Sus datos expiran a las 24 horas, dejando la demo limpia para el siguiente visitante. Patrón RouteAI.</p></div>
+        <div class="fi"><span class="ficon">📋</span><h3>5 ADRs documentados</h3><p>Multi-tenant, JWT + refresh tokens, Prisma ORM, despliegue Vercel+Render+Neon y asistente RAG + blindaje demo, cada uno con contexto, alternativas y consecuencias. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/DECISIONS.md" target="_blank" style="color:var(--blue)">Decisiones técnicas →</a></p></div>
       </div>
     </div>
   </section>
@@ -187,7 +189,7 @@
         <div class="fi"><h3>🐳 Docker Compose</h3><p>PostgreSQL, API y dashboard separados como contenedores con docker-compose. Un comando levanta todo el stack en local.</p></div>
         <div class="fi"><h3>🗄️ Prisma ORM en vez de SQL raw</h3><p>Schemas declarativos, migraciones automáticas y type-safety desde la BD hasta el frontend. Menos errores, más velocidad de iteración.</p></div>
         <div class="fi"><h3>👤 Dos roles, no cuatro</h3><p>Primero se diseñaron roles para controlar al personal (limpiadores, operarios), pero la app evolucionó a gestión de stock pura. Se simplificó: <code>oficina</code> lo gestiona todo y <code>supervisor</code> hace el recuento de inventario. Menos roles, menos fricción, más foco en el problema real.</p></div>
-        <div class="fi"><h3>📋 Decisiones documentadas</h3><p>La arquitectura multi-tenant, la autenticación JWT, la elección de Prisma y el despliegue están documentados en 4 ADRs con contexto, alternativas y consecuencias, consolidados en <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/DECISIONS.md" target="_blank" style="color:var(--blue)">DECISIONS.md</a>.</p></div>
+        <div class="fi"><h3>📋 Decisiones documentadas</h3><p>La arquitectura multi-tenant, la autenticación JWT, la elección de Prisma, el despliegue y el asistente RAG están documentados en 5 ADRs con contexto, alternativas y consecuencias, consolidados en <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/DECISIONS.md" target="_blank" style="color:var(--blue)">DECISIONS.md</a>.</p></div>
       </div>
     </div>
   </section>

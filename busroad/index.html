@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kavana BusRoad: Rutas para Vehículos Grandes — Proyecto Portfolio Full-Stack</title>
+  <meta name="description" content="Proyecto portfolio de full-stack: rutas seguras para autobuses y camiones con restricciones reales de altura, anchura, largo y peso en Europa. Vue 3, FastAPI, Kubernetes, OpenRouteService." />
+  <meta name="dateModified" content="2026-08-04" />
+  <link rel="canonical" href="https://www.kavanasystems.com/busroad/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0a0a0f;color:#f0f0f5;line-height:1.7;-webkit-font-smoothing:antialiased}
+    :root{--bg:#0a0a0f;--bg2:#111118;--card:#16161f;--border:#232333;--text2:#9090a8;--muted:#606078;--blue:#6dc7fe;--blue2:#5ab8f0;--blue-s:rgba(109,199,254,0.12);--green:#22c55e;--amber:#f59e0b;--radius:12px;--rsm:8px;--mono:'JetBrains Mono',monospace}
+    .w{max-width:900px;margin:0 auto;padding:0 2rem}
+    section{padding:5rem 0}
+    .sl{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--blue);text-transform:uppercase;letter-spacing:.15em;margin-bottom:.75rem;display:block}
+    .st{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:1rem}
+    .ss{font-size:1.1rem;color:var(--text2);max-width:680px;line-height:1.7}
+    .badge{display:inline-flex;align-items:center;gap:6px;background:var(--blue-s);border:1px solid var(--border);color:var(--blue);padding:6px 14px;border-radius:100px;font-weight:600;font-size:.8rem;font-family:var(--mono)}
+    .badge::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--amber);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    nav{position:fixed;top:60px;left:0;right:0;z-index:100;background:rgba(10,10,15,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .nb{display:flex;align-items:center;gap:10px;text-decoration:none;color:#f0f0f5}
+    .nl{width:32px;height:32px;border-radius:8px;object-fit:contain}
+    .nb span{font-weight:700;font-size:16px;letter-spacing:-.02em}
+    .nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none}
+    .nav-links a{color:var(--text2);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+    .nav-links a:hover{color:var(--blue)}
+    .ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .ham span{width:22px;height:2px;background:#f0f0f5;border-radius:2px;transition:.3s}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:all .3s}
+    .card:hover{border-color:#333350}
+    .card h3{font-size:1.1rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+    .cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:2rem}
+    .ic{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rsm);padding:1.25rem;margin:1rem 0}
+    .ic h4{font-size:.95rem;font-weight:700;margin-bottom:.5rem;color:var(--blue)}
+    .ic p{font-size:.9rem;color:var(--text2);margin:0}
+    .tc{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
+    .tc .card{height:100%}
+    .sg{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.5rem}
+    .stg{background:var(--blue-s);border:1px solid var(--border);color:var(--blue);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:600;font-family:var(--mono)}
+    .cta-s{padding:4rem 0;text-align:center}
+    .cta-s h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin-bottom:1rem}
+    .cta-s p{color:var(--text2);margin-bottom:1.5rem;max-width:500px;margin-left:auto;margin-right:auto}
+    .ca{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+    .b1{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#0a0a0f;padding:14px 28px;border-radius:var(--rsm);text-decoration:none;font-weight:700;font-size:15px;transition:all .2s;border:none;cursor:pointer}
+    .b1:hover{background:var(--blue2);transform:translateY(-1px)}
+    .b2{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#f0f0f5;padding:14px 28px;border-radius:var(--rsm);text-decoration:none;font-weight:600;font-size:15px;border:1px solid var(--border);transition:all .2s}
+    .b2:hover{border-color:var(--blue);background:var(--card)}
+    .fg{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
+    .fi{padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+    .fi h3{font-size:1rem;font-weight:700;margin-bottom:.75rem;color:var(--blue)}
+    .fi p{font-size:.9rem;color:var(--text2);line-height:1.6}
+    .ficon{font-size:1.5rem;margin-bottom:.75rem;display:block}
+    .mg{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin:2rem 0}
+    .mc{text-align:center;padding:2rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+    .mv{font-size:2.5rem;font-weight:900;color:var(--blue);letter-spacing:-.03em}
+    .ml{font-size:.8rem;color:var(--muted);margin-top:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+    .fs{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+    .fstep{display:flex;align-items:flex-start;gap:1.25rem;padding:1.25rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+    .fsn{width:36px;height:36px;border-radius:50%;background:var(--blue);color:#0a0a0f;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+    .fsc h4{font-size:.95rem;font-weight:700;margin-bottom:.25rem}
+    .fsc p{font-size:.85rem;color:var(--text2);margin:0}
+    .prose{font-size:1.05rem;color:var(--text2);line-height:1.8;max-width:720px}
+    .prose p{margin-bottom:1.25rem}
+    .prose strong{color:#f0f0f5}
+    .prose a{color:var(--blue);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+    .prose a:hover{border-color:var(--blue)}
+    footer{padding:2rem 0;background:var(--bg2);border-top:1px solid var(--border)}
+    .fc{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.85rem;color:var(--muted)}
+    .flogo{width:24px;height:24px;border-radius:4px;object-fit:contain;vertical-align:middle;margin-right:6px}
+    .fl{display:flex;gap:1.5rem}
+    .fl a{color:var(--muted);text-decoration:none;transition:color .2s}
+    .fl a:hover{color:var(--blue)}
+    @media(max-width:1024px){.tc{grid-template-columns:1fr}.fg{grid-template-columns:1fr}.mg{grid-template-columns:repeat(2,1fr)}.nav-links{display:none}.ham{display:flex}}
+    @media(max-width:640px){.mg{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <!-- Status Banner -->
+  <div style="background:var(--bg2);border-bottom:1px solid var(--border);padding:1rem 0">
+    <div class="w" style="display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;font-size:.9rem;color:var(--text2)">
+      <span class="badge">Portfolio · Full-stack · Open Source</span>
+      <div style="display:flex;gap:1rem">
+        <a href="https://www.linkedin.com/in/kavanasystems/" target="_blank" style="color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500">💼 LinkedIn</a>
+        <a href="mailto:kavanasystems.info@gmail.com" style="color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500">✉️ Email</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#inicio" class="nb"><img src="../warehouse/logo.png?v=2" alt="Kavana" class="nl"><span>Kavana BusRoad</span></a>
+    <ul class="nav-links">
+      <li><a href="#problema">Origen</a></li>
+      <li><a href="#tech">Capacidades</a></li>
+      <li><a href="#flujo">Flujo</a></li>
+      <li><a href="#demo">Demo</a></li>
+    </ul>
+    <button class="ham" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+
+  <!-- Hero -->
+  <header id="inicio" style="padding-top:180px;padding-bottom:3rem;position:relative;overflow:hidden">
+    <div style="position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(109,199,254,0.15) 0%,transparent 70%);pointer-events:none"></div>
+    <div class="w">
+      <div style="max-width:720px">
+        <p style="font-family:var(--mono);font-size:13px;font-weight:500;color:var(--blue);text-transform:uppercase;letter-spacing:.15em;margin-bottom:1rem;display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 16px 6px 12px">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--green)"></span> Proyecto destacado · Product Engineering · Full Stack
+        </p>
+        <h1 style="font-size:clamp(2.25rem,5vw,3.5rem);font-weight:900;letter-spacing:-.04em;line-height:1.1;margin-bottom:1.5rem">KAVANA BusRoad — rutas que <span style="background:linear-gradient(135deg,#6dc7fe,#22c55e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">entienden las dimensiones</span> de tu vehículo</h1>
+        <div class="prose" style="margin-top:1.5rem;font-size:1.15rem">
+          <p><strong>Proyecto portfolio de full-stack.</strong> Mi hermano es conductor de autobús recién titulado. Cuando planifica una ruta, Google Maps le dice por dónde ir en coche, sin saber que su vehículo mide 3,5 metros de alto, 2,5 de ancho y 12 de largo. Un puente bajo o una calle estrecha pueden convertir una ruta normal en un problema serio.</p>
+          <p>Tecnologías: Vue 3, FastAPI, Kubernetes (k3s), OpenRouteService. <a href="#tech" style="color:var(--blue)">Ver capacidades técnicas →</a></p>
+        </div>
+        <div class="ca" style="margin-top:2rem;justify-content:flex-start">
+          <a href="https://github.com/kavanasystemsinfo-ui/kavana-busroad" target="_blank" class="b1">📂 Código en GitHub</a>
+          <a href="#demo" class="b2">🚌 Probar la app</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Metrics -->
+  <section style="padding-top:0"><div class="w"><div class="mg">
+    <div class="mc"><div class="mv">2</div><div class="ml">Motores de rutas</div></div>
+    <div class="mc"><div class="mv">4</div><div class="ml">Restricciones (alto·ancho·largo·peso)</div></div>
+    <div class="mc"><div class="mv">k3s</div><div class="ml">Kubernetes en producción</div></div>
+    <div class="mc"><div class="mv">2.000</div><div class="ml">Rutas gratis/día (ORS)</div></div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:1.5rem">
+    <a href="https://github.com/kavanasystemsinfo-ui/kavana-busroad/blob/main/README.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📚 README</a>
+    <a href="https://busroad-api.kavanasystems.com/api/v1/health" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">🔗 API en producción</a>
+  </div>
+  </div></section>
+
+  <!-- Problema -->
+  <section id="problema" style="background:var(--bg2)">
+    <div class="w">
+      <span class="sl">El origen</span>
+      <h2 class="st">Por qué construí esto</h2>
+      <div class="prose">
+        <p>Mi hermano acababa de sacarse el carné de autobús. Cuando le pregunté cómo planificaba las rutas, me enseñó Google Maps como todo el mundo, y me dijo una frase que lo cambió todo: <strong>"esto me lleva por sitios por donde no puedo pasar"</strong>.</p>
+        <p>Los navegadores de coche no conocen las restricciones de un vehículo grande: la altura de un puente, la anchura de una calle, el peso máximo de un tramo, el largo en una rotonda. Esos datos existen en el mapa (los pone OpenStreetMap), pero ninguna app de consumo los aplica en Europa.</p>
+        <p><strong>Así nació Kavana BusRoad.</strong> Un proyecto personal que resuelve un problema real y muy concreto: una ruta segura para un vehículo de dimensiones conocidas, y la comparación honesta con la ruta que seguiría un coche normal.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lo que demuestra -->
+  <section id="tech">
+    <div class="w">
+      <span class="sl">Lo que demuestra</span>
+      <h2 class="st">Capacidades técnicas visibles en este proyecto</h2>
+      <div class="fg">
+        <div class="fi"><span class="ficon">🚌</span><h3>API REST con FastAPI</h3><p>Backend en Python con FastAPI. Recibe origen, destino y dimensiones del vehículo, geocodifica las direcciones y calcula la ruta con restricciones. Health check público en producción.</p></div>
+        <div class="fi"><span class="ficon">🗺️</span><h3>OpenRouteService (driving-hgv)</h3><p>Motor de rutas para vehículos pesados con restricciones reales de altura, anchura, largo y peso en Europa, usando los datos de OpenStreetMap. 2.000 rutas gratis al día.</p></div>
+        <div class="fi"><span class="ficon">☸️</span><h3>Kubernetes (k3s) en producción</h3><p>Backend desplegado en un clúster Kubernetes (k3s) en el VPS, detrás de nginx con certificado TLS real de Let's Encrypt. Despliegue con Dockerfile + kubectl.</p></div>
+        <div class="fi"><span class="ficon">⚖️</span><h3>Comparativa segura vs convencional</h3><p>Calcula la ruta optimizada para el vehículo y la ruta convencional de coche con las mismas coordenadas, y muestra la diferencia de km y minutos. Si coinciden, no hay obstáculos: la app lo dice.</p></div>
+        <div class="fi"><span class="ficon">🧭</span><h3>Navegación con waypoints</h3><p>Decodifica el polyline de la ruta segura y lo convierte en puntos de paso para Google Maps y Waze. El navegador se ve obligado a seguir tu ruta, no la de coche.</p></div>
+        <div class="fi"><span class="ficon">📱</span><h3>Frontend PWA con Vue 3</h3><p>Aplicación web moderna con Vue 3 + Vite + TypeScript. Acepta direcciones completas de Google Maps, dimensiones del vehículo y muestra los pasos en español.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flujo -->
+  <section id="flujo" style="background:var(--bg2)">
+    <div class="w">
+      <span class="sl">Cómo funciona</span>
+      <h2 class="st">Del problema a la ruta segura</h2>
+      <div class="fs">
+        <div class="fstep"><div class="fsn">1</div><div class="fsc"><h4>Escribe origen y destino</h4><p>Direcciones completas como las pegas en Google Maps: "C. de Ing. Tamarit, 9, 46170 Villar del Arzobispo, Valencia".</p></div></div>
+        <div class="fstep"><div class="fsn">2</div><div class="fsc"><h4>Pon las dimensiones de tu vehículo</h4><p>Altura, anchura, largo y peso. Son las restricciones que el motor aplica a cada tramo de la ruta.</p></div></div>
+        <div class="fstep"><div class="fsn">3</div><div class="fsc"><h4>Obtén tu ruta segura + la convencional</h4><p>La app calcula la ruta optimizada para tu vehículo y la de coche normal, con distancia, duración y pasos en español.</p></div></div>
+        <div class="fstep"><div class="fsn">4</div><div class="fsc"><h4>Navega con tu ruta</h4><p>Pulsa el botón para abrir Google Maps o Waze con puntos de paso que fuerzan tu ruta segura. Nada de desvíos por la ruta de coche.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo -->
+  <section id="demo" class="cta-s">
+    <div class="w">
+      <h2>Prueba BusRoad</h2>
+      <p>Escribe un origen y un destino, pon las dimensiones de un autobús o camión, y mira la diferencia entre tu ruta y la de un coche.</p>
+      <div class="ca">
+        <a href="https://frontend-alpha-eight-85.vercel.app" target="_blank" class="b1">🚌 Abrir la app</a>
+        <a href="https://busroad-api.kavanasystems.com/api/v1/health" target="_blank" class="b2">🔗 Ver el health check</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="w fc">
+      <div><img src="../warehouse/logo.png?v=2" alt="Kavana" class="flogo">Kavana Systems</div>
+      <div class="fl">
+        <a href="https://www.linkedin.com/in/kavanasystems/" target="_blank">LinkedIn</a>
+        <a href="mailto:kavanasystems.info@gmail.com">Email</a>
+        <a href="https://github.com/kavanasystemsinfo-ui" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
