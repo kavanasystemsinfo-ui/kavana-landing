@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kavana BusRoad: Rutas para Vehículos Grandes — Proyecto Portfolio Full-Stack</title>
-  <meta name="description" content="Proyecto portfolio de full-stack: rutas seguras para autobuses y camiones con restricciones reales de altura, anchura, largo y peso en Europa. Vue 3, FastAPI, Kubernetes, OpenRouteService." />
+  <title>Kavana BusRoad: Planificación de rutas para Autobuses y Camiones — Proyecto Portfolio Full-Stack</title>
+  <meta name="description" content="Proyecto portfolio de full-stack: planificación de rutas para vehículos pesados con restricciones reales de altura, anchura, largo y peso en Europa, y navegación con waypoints en Google Maps/Waze. Vue 3, FastAPI, Kubernetes, OpenRouteService." />
   <meta name="dateModified" content="2026-08-04" />
   <link rel="canonical" href="https://www.kavanasystems.com/busroad/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -112,10 +112,10 @@
         <p style="font-family:var(--mono);font-size:13px;font-weight:500;color:var(--blue);text-transform:uppercase;letter-spacing:.15em;margin-bottom:1rem;display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 16px 6px 12px">
           <span style="width:8px;height:8px;border-radius:50%;background:var(--green)"></span> Proyecto destacado · Product Engineering · Full Stack
         </p>
-        <h1 style="font-size:clamp(2.25rem,5vw,3.5rem);font-weight:900;letter-spacing:-.04em;line-height:1.1;margin-bottom:1.5rem">KAVANA BusRoad — rutas que <span style="background:linear-gradient(135deg,#a78bfa,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">entienden las dimensiones</span> de tu vehículo</h1>
+        <h1 style="font-size:clamp(2.25rem,5vw,3.5rem);font-weight:900;letter-spacing:-.04em;line-height:1.1;margin-bottom:1.5rem">KAVANA BusRoad — <span style="background:linear-gradient(135deg,#a78bfa,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">planificación de rutas</span> para autobuses y camiones</h1>
         <div class="prose" style="margin-top:1.5rem;font-size:1.15rem">
           <p><strong>Proyecto portfolio de full-stack.</strong> Mi hermano es conductor de autobús recién titulado. Cuando planifica una ruta, Google Maps le dice por dónde ir en coche, sin saber que su vehículo mide 3,5 metros de alto, 2,5 de ancho y 12 de largo. Un puente bajo o una calle estrecha pueden convertir una ruta normal en un problema serio.</p>
-          <p>Tecnologías: Vue 3, FastAPI, Kubernetes (k3s), OpenRouteService. <a href="#tech" style="color:var(--blue)">Ver capacidades técnicas →</a></p>
+          <p>Diseñé un servicio que combina OpenRouteService, OpenStreetMap y la navegación de Google Maps/Waze para ofrecer rutas adaptadas a las dimensiones reales del vehículo. <a href="#tech" style="color:var(--blue)">Ver capacidades técnicas →</a></p>
         </div>
         <div class="ca" style="margin-top:2rem;justify-content:flex-start">
           <a href="https://github.com/kavanasystemsinfo-ui/kavana-busroad" target="_blank" class="b1">📂 Código en GitHub</a>
@@ -127,10 +127,10 @@
 
   <!-- Metrics -->
   <section style="padding-top:0"><div class="w"><div class="mg">
-    <div class="mc"><div class="mv">2</div><div class="ml">Motores de rutas</div></div>
+    <div class="mc"><div class="mv">2</div><div class="ml">Rutas en pantalla (segura + coche)</div></div>
     <div class="mc"><div class="mv">4</div><div class="ml">Restricciones (alto·ancho·largo·peso)</div></div>
     <div class="mc"><div class="mv">k3s</div><div class="ml">Kubernetes en producción</div></div>
-    <div class="mc"><div class="mv">2.000</div><div class="ml">Rutas gratis/día (ORS)</div></div>
+    <div class="mc"><div class="mv">6</div><div class="ml">Waypoints forzando tu ruta en Maps</div></div>
   </div>
   <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:1.5rem">
     <a href="https://github.com/kavanasystemsinfo-ui/kavana-busroad/blob/main/README.md" target="_blank" style="color:var(--text2);font-size:.8rem;text-decoration:none;background:var(--card);padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-family:var(--mono)">📚 README</a>
@@ -145,7 +145,7 @@
       <h2 class="st">Por qué construí esto</h2>
       <div class="prose">
         <p>Mi hermano acababa de sacarse el carné de autobús. Cuando le pregunté cómo planificaba las rutas, me enseñó Google Maps como todo el mundo, y me dijo una frase que lo cambió todo: <strong>"esto me lleva por sitios por donde no puedo pasar"</strong>.</p>
-        <p>Los navegadores de coche no conocen las restricciones de un vehículo grande: la altura de un puente, la anchura de una calle, el peso máximo de un tramo, el largo en una rotonda. Esos datos existen en el mapa (los pone OpenStreetMap), pero ninguna app de consumo los aplica en Europa.</p>
+        <p>Los navegadores convencionales están pensados para turismos: la altura de un puente, la anchura de una calle, el peso máximo de un tramo o el largo en una rotonda no entran en sus cálculos. Esos datos existen en el mapa (los pone OpenStreetMap), pero la mayoría de navegadores de consumo no los tienen en cuenta para vehículos pesados.</p>
         <p><strong>Así nació Kavana BusRoad.</strong> Un proyecto personal que resuelve un problema real y muy concreto: una ruta segura para un vehículo de dimensiones conocidas, y la comparación honesta con la ruta que seguiría un coche normal.</p>
       </div>
     </div>
@@ -157,11 +157,11 @@
       <span class="sl">Lo que demuestra</span>
       <h2 class="st">Capacidades técnicas visibles en este proyecto</h2>
       <div class="fg">
+        <div class="fi"><span class="ficon">🧭</span><h3>Navegación con waypoints</h3><p>La app no se queda en la ruta: decodifica el polyline calculado y lo convierte en puntos de paso para Google Maps y Waze, forzando al navegador a seguir exactamente el itinerario seguro en lugar de recalcular por la ruta de coche.</p></div>
+        <div class="fi"><span class="ficon">⚖️</span><h3>Comparativa segura vs convencional</h3><p>Calcula la ruta optimizada para el vehículo y la ruta convencional de coche con las mismas coordenadas, y muestra la diferencia de km y minutos. Si coinciden, no hay obstáculos: la app lo dice.</p></div>
         <div class="fi"><span class="ficon">🚌</span><h3>API REST con FastAPI</h3><p>Backend en Python con FastAPI. Recibe origen, destino y dimensiones del vehículo, geocodifica las direcciones y calcula la ruta con restricciones. Health check público en producción.</p></div>
         <div class="fi"><span class="ficon">🗺️</span><h3>OpenRouteService (driving-hgv)</h3><p>Motor de rutas para vehículos pesados con restricciones reales de altura, anchura, largo y peso en Europa, usando los datos de OpenStreetMap. 2.000 rutas gratis al día.</p></div>
         <div class="fi"><span class="ficon">☸️</span><h3>Kubernetes (k3s) en producción</h3><p>Backend desplegado en un clúster Kubernetes (k3s) en el VPS, detrás de nginx con certificado TLS real de Let's Encrypt. Despliegue con Dockerfile + kubectl.</p></div>
-        <div class="fi"><span class="ficon">⚖️</span><h3>Comparativa segura vs convencional</h3><p>Calcula la ruta optimizada para el vehículo y la ruta convencional de coche con las mismas coordenadas, y muestra la diferencia de km y minutos. Si coinciden, no hay obstáculos: la app lo dice.</p></div>
-        <div class="fi"><span class="ficon">🧭</span><h3>Navegación con waypoints</h3><p>Decodifica el polyline de la ruta segura y lo convierte en puntos de paso para Google Maps y Waze. El navegador se ve obligado a seguir tu ruta, no la de coche.</p></div>
         <div class="fi"><span class="ficon">📱</span><h3>Frontend PWA con Vue 3</h3><p>Aplicación web moderna con Vue 3 + Vite + TypeScript. Acepta direcciones completas de Google Maps, dimensiones del vehículo y muestra los pasos en español.</p></div>
       </div>
     </div>
