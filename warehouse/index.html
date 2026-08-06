@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kavana Warehouse: WMS Multi-Tenant — Proyecto Portfolio Full-Stack</title>
   <meta name="description" content="Proyecto portfolio de full-stack: sistema de gestión de inventario multi-tenant construido para resolver un problema real de una empresa de limpieza. React 19, Node.js + Express, PostgreSQL 16, Docker." />
-  <meta name="dateModified" content="2026-08-02" />
+  <meta name="dateModified" content="2026-08-05" />
   <link rel="canonical" href="https://www.kavanasystems.com/warehouse/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -129,7 +129,7 @@
 
   <!-- Metrics -->
   <section style="padding-top:0"><div class="w"><div class="mg">
-    <div class="mc"><div class="mv">45</div><div class="ml">Tests API (Jest)</div></div>
+    <div class="mc"><div class="mv">60</div><div class="ml">Tests API (Jest)</div></div>
     <div class="mc"><div class="mv">45</div><div class="ml">Endpoints API</div></div>
     <div class="mc"><div class="mv">5</div><div class="ml">ADRs documentados</div></div>
     <div class="mc"><div class="mv">31.000+</div><div class="ml">Movimientos simulados</div></div>
@@ -167,7 +167,7 @@
         <div class="fi"><span class="ficon">📊</span><h3>Dashboard con KPIs</h3><p>Vista operativa con métricas de consumo, evolución mensual, alertas de stock bajo y control de presupuesto por centro.</p></div>
         <div class="fi"><span class="ficon">📋</span><h3>Trazabilidad completa</h3><p>Registro histórico de todos los movimientos con filtros por fecha, centro, producto y usuario. Nada desaparece sin dejar rastro.</p></div>
         <div class="fi"><span class="ficon">🔗</span><h3>API REST documentada</h3><p>API diseñada para integraciones con ERPs o sistemas externos. Documentación técnica de endpoints disponible en el repositorio.</p></div>
-        <div class="fi"><span class="ficon">🧪</span><h3>45 tests de API + 3 de frontend</h3><p>45 tests de integración con el stack real (supertest + PostgreSQL), incluido el flujo completo conteo → desviación → propuesta de compra y el asistente técnico. 3 tests de componente con Vitest + Testing Library. Ejecutables con <code>npm test</code> y en CI con GitHub Actions.</p></div>
+        <div class="fi"><span class="ficon">🧪</span><h3>60 tests de API + 3 de frontend</h3><p>60 tests de integración con el stack real (supertest + PostgreSQL), incluido el flujo completo conteo → desviación → propuesta de compra y el asistente técnico. 3 tests de componente con Vitest + Testing Library. Ejecutables con <code>npm test</code> y en CI con GitHub Actions.</p></div>
         <div class="fi"><span class="ficon">🤖</span><h3>Asistente técnico RAG</h3><p>Chat que responde sobre la documentación real del proyecto: README, DECISIONS.md, ADRs y código. Indexa los documentos con búsqueda por similitud y genera respuestas con modelos de IA, con límite de uso por IP para proteger la demo.</p></div>
         <div class="fi"><span class="ficon">🛡️</span><h3>Blindaje de demo (modo solo lectura)</h3><p>Los supervisores de visita solo pueden consultar y crear recuentos; la gestión global devuelve 403. Sus datos expiran a las 24 horas, dejando la demo limpia para el siguiente visitante. Patrón RouteAI.</p></div>
         <div class="fi"><span class="ficon">📋</span><h3>5 ADRs documentados</h3><p>Multi-tenant, JWT + refresh tokens, Prisma ORM, despliegue Vercel+Render+Neon y asistente RAG + blindaje demo, cada uno con contexto, alternativas y consecuencias. <a href="https://github.com/kavanasystemsinfo-ui/Kavana-Warehouse/blob/main/DECISIONS.md" target="_blank" style="color:var(--blue)">Decisiones técnicas →</a></p></div>

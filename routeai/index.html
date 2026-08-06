@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kavana Route AI: Optimización Inteligente de Rutas de Reparto</title>
   <meta name="description" content="Plataforma SaaS de optimización inteligente de rutas de reparto. OCR de albaranes, optimización algorítmica 2-opt, firma digital de entrega (POD) y Torre de Control." />
-  <meta name="dateModified" content="2026-08-01" />
+  <meta name="dateModified" content="2026-08-05" />
   <link rel="canonical" href="https://www.kavanasystems.com/routeai/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -160,7 +160,7 @@
       <span class="sl">Lo que demuestra</span>
       <h2 class="st">Capacidades técnicas visibles en este proyecto</h2>
       <div class="fg">
-        <div class="fi"><span class="ficon">🏗️</span><h3>Arquitectura backend real</h3><p>API REST con Express, 25 endpoints, middlewares JWT, carga de archivos, generación de PDF, OCR, geocodificación. Separación clara de responsabilidades en servicios.</p></div>
+        <div class="fi"><span class="ficon">🏗️</span><h3>Arquitectura backend real</h3><p>API REST con Express, 26 endpoints, middlewares JWT, carga de archivos, generación de PDF, OCR, geocodificación. Separación clara de responsabilidades en servicios.</p></div>
         <div class="fi"><span class="ficon">🗄️</span><h3>Base de datos dual</h3><p>PostgreSQL en producción (Neon) + JSON file en desarrollo. Misma interfaz de queries, dos implementaciones. Sin cambiar código de negocio al cambiar de BD.</p></div>
         <div class="fi"><span class="ficon">🧮</span><h3>Algoritmo 2-opt propio</h3><p>Implementé el algoritmo de optimización de rutas desde cero. Vecino más cercano + 2-opt. Mejor que IA gratuita, sin coste, <1ms. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/001-reemplazo-ia-por-2opt.md" target="_blank" style="color:var(--gold)">Decisión documentada</a>.</p></div>
         <div class="fi"><span class="ficon">🔍</span><h3>Geocoding con fallbacks + validación</h3><p>Nominatim gratuito pero impreciso. 8 formatos de query por dirección + bounding box de Valencia. ~80% acierto. <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/docs/adr/002-geocodificacion-nominatim-fallbacks.md" target="_blank" style="color:var(--gold)">ADR →</a></p></div>
@@ -201,7 +201,7 @@
       <span class="sl">Stack tecnológico</span>
       <h2 class="st">Arquitectura real, no mockups</h2>
       <div class="tc">
-        <div class="card"><h3>🔙 Backend</h3><div class="sg"><span class="stg">Node 20+</span><span class="stg">Express 4</span><span class="stg">pg</span><span class="stg">JSON</span><span class="stg">JWT</span><span class="stg">PDFKit</span><span class="stg">pdftotext</span><span class="stg">OpenRouter</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>API REST 25 endpoints</li><li>BD dual: PostgreSQL (Neon) + JSON fallback</li><li>Geocoding Nominatim + validación Valencia</li><li>Optimización 2-opt (0€, &lt;1ms)</li><li>Asistente RAG sobre la documentación (TF-IDF + OpenRouter)</li></ul></div>
+        <div class="card"><h3>🔙 Backend</h3><div class="sg"><span class="stg">Node 20+</span><span class="stg">Express 4</span><span class="stg">pg</span><span class="stg">JSON</span><span class="stg">JWT</span><span class="stg">PDFKit</span><span class="stg">pdftotext</span><span class="stg">OpenRouter</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>API REST 26 endpoints</li><li>BD dual: PostgreSQL (Neon) + JSON fallback</li><li>Geocoding Nominatim + validación Valencia</li><li>Optimización 2-opt (0€, &lt;1ms)</li><li>Asistente RAG sobre la documentación (TF-IDF + OpenRouter)</li></ul></div>
         <div class="card"><h3>🎨 Frontend</h3><div class="sg"><span class="stg">React 18</span><span class="stg">Vite</span><span class="stg">Canvas</span><span class="stg">jsPDF</span></div><ul class="prose" style="font-size:.9rem;margin-top:1rem"><li>App web del repartidor responsive</li><li>Torre de Control desktop</li><li>Estilo oscuro Electric Gold</li></ul></div>
       </div>
       <div class="card" style="margin-top:2rem">
@@ -210,7 +210,7 @@
         <div style="margin-top:1rem;font-size:.85rem;color:var(--text2);border-top:1px solid var(--border);padding-top:1rem">
           📚 <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/DECISIONS.md" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:600">Decisiones técnicas</a>
           · <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/blob/main/README.md" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:600">README completo</a>
-          · <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/tree/main/docs/adr" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:600">ADRs (6 documentos)</a>
+          · <a href="https://github.com/kavanasystemsinfo-ui/kavana-RouteAI/tree/main/docs/adr" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:600">ADRs (7 documentos)</a>
         </div>
       </div>
     </div>
