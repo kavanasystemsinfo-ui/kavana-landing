@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kavana BusRoad: Planificación de rutas para Autobuses y Camiones — Proyecto Portfolio Full-Stack</title>
-  <meta name="description" content="Proyecto portfolio de full-stack: planificación de rutas para vehículos pesados con restricciones reales de altura, anchura, largo y peso en Europa, y navegación con waypoints en Google Maps/Waze. Vue 3, FastAPI, Kubernetes, OpenRouteService." />
+  <meta name="description" content="Proyecto portfolio de full-stack: planificación de rutas para vehículos pesados con restricciones reales de altura, anchura, largo y peso en Europa, y navegación con waypoints en Google Maps/Waze. Vue 3, FastAPI, Fly.io, OpenRouteService." />
   <meta name="dateModified" content="2026-08-04" />
   <link rel="canonical" href="https://www.kavanasystems.com/busroad/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -129,7 +129,7 @@
   <section style="padding-top:0"><div class="w"><div class="mg">
     <div class="mc"><div class="mv">2</div><div class="ml">Rutas en pantalla (segura + coche)</div></div>
     <div class="mc"><div class="mv">4</div><div class="ml">Restricciones (alto·ancho·largo·peso)</div></div>
-    <div class="mc"><div class="mv">k3s</div><div class="ml">Kubernetes en producción</div></div>
+    <div class="mc"><div class="mv">Fly.io</div><div class="ml">Backend desplegado en máquinas</div></div>
     <div class="mc"><div class="mv">6</div><div class="ml">Waypoints forzando tu ruta en Maps</div></div>
   </div>
   <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:1.5rem">
@@ -161,7 +161,7 @@
         <div class="fi"><span class="ficon">⚖️</span><h3>Comparativa segura vs convencional</h3><p>Calcula la ruta optimizada para el vehículo y la ruta convencional de coche con las mismas coordenadas, y muestra la diferencia de km y minutos. Si coinciden, no hay obstáculos: la app lo dice.</p></div>
         <div class="fi"><span class="ficon">🚌</span><h3>API REST con FastAPI</h3><p>Backend en Python con FastAPI. Recibe origen, destino y dimensiones del vehículo, geocodifica las direcciones y calcula la ruta con restricciones. Health check público en producción.</p></div>
         <div class="fi"><span class="ficon">🗺️</span><h3>OpenRouteService (driving-hgv)</h3><p>Motor de rutas para vehículos pesados con restricciones reales de altura, anchura, largo y peso en Europa, usando los datos de OpenStreetMap. 2.000 rutas gratis al día.</p></div>
-        <div class="fi"><span class="ficon">☸️</span><h3>Kubernetes (k3s) en producción</h3><p>Backend desplegado en un clúster Kubernetes (k3s) en el VPS, detrás de nginx con certificado TLS real de Let's Encrypt. Despliegue con Dockerfile + kubectl.</p></div>
+        <div class="fi"><span class="ficon">🛫</span><h3>Fly.io en producción</h3><p>Backend desplegado en Fly.io (machines) con certificado TLS real de Let's Encrypt, DNS custom en Namecheap y auto-stop a cero (coste cero en reposo). Dockerfile + despliegue con flyctl.</p></div>
         <div class="fi"><span class="ficon">📱</span><h3>Frontend PWA con Vue 3</h3><p>Aplicación web moderna con Vue 3 + Vite + TypeScript. Acepta direcciones completas de Google Maps, dimensiones del vehículo y muestra los pasos en español.</p></div>
       </div>
     </div>
