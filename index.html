@@ -4,23 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kavana Systems — Jorge | Software nacido de la fábrica</title>
-  <meta name="description" content="No aprendí software en una universidad. Lo aprendí intentando resolver los problemas que vivía cada día en una fábrica. Hoy sigo haciendo exactamente lo mismo." />
+  <meta name="description" content="Product Engineer · Full Stack Software Engineer. Construyo productos completos desde el problema de negocio hasta el despliegue, con código abierto y decisiones documentadas. Cinco productos para industria y logística: MES, WMS, rutas, eficiencia y transporte." />
   <meta name="keywords" content="software industrial, fabrica, trazabilidad, produccion, Jorge, Kavana" />
 
   <meta property="og:title" content="Kavana Systems — Jorge" />
-  <meta property="og:description" content="Construyo el software que siempre eché de menos cuando trabajaba en producción." />
+  <meta property="og:description" content="Product Engineer · Full Stack Software Engineer. Cinco productos para industria y logística, de código abierto y verificables." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.kavanasystems.com/" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="canonical" href="https://www.kavanasystems.com/" />
+  <meta name="dateModified" content="2026-08-08" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Jorge Adán",
-    "jobTitle": "Founder & Software Engineer",
+    "jobTitle": "Product Engineer · Full Stack Software Engineer",
     "description": "Creador de Kavana Systems. Construye software industrial nacido de la experiencia en planta de producción.",
     "url": "https://www.kavanasystems.com/",
     "image": "https://www.kavanasystems.com/jorge-portrait.png",
@@ -79,6 +80,7 @@
     .hero h1 { font-size: 3.2rem; font-weight: 900; line-height: 1.15; color: #fff; margin-bottom: 22px; }
     .hero h1 .mark { color: var(--primary); }
     .hero .lead { font-size: 1.12rem; color: var(--muted); margin-bottom: 28px; }
+    .hero-role { display: inline-block; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.5px; color: #fff; background: var(--primary-soft); border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; margin-bottom: 18px; }
     .hero .cta { display: flex; gap: 14px; flex-wrap: wrap; }
     .btn { display: inline-flex; align-items: center; gap: 9px; padding: 12px 26px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all .22s; cursor: pointer; border: none; }
     .btn-primary { background: var(--primary); color: #fff; }
@@ -98,6 +100,7 @@
     .what-icon { font-size: 1.6rem; }
     .what-label { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1rem; color: #fff; }
     .what-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+    .what-metric { font-size: 0.78rem; color: var(--primary); font-weight: 700; font-family: 'Courier New', monospace; margin-top: 2px; }
 
     /* SECTIONS */
     section { padding: 84px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
@@ -122,6 +125,8 @@
     .product .tag { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary); font-weight: 700; }
     .product h3 { font-family: 'Montserrat', sans-serif; font-size: 1.25rem; color: #fff; margin: 8px 0 10px; }
     .product p { font-size: 0.95rem; color: var(--muted); }
+    .product .tech { font-family: 'Courier New', monospace; font-size: 0.78rem; color: var(--primary); margin-top: 10px; line-height: 1.5; }
+    .product .metrics { font-size: 0.8rem; color: var(--muted-2); margin-top: 5px; font-weight: 600; }
     .product .arrow { margin-top: 14px; color: var(--primary); font-size: 0.9rem; font-weight: 600; }
 
     /* BIG STATEMENT */
@@ -174,9 +179,9 @@
     <div class="container">
       <a href="#top" class="brand"><span class="dot"></span> KAVANA <span style="color:var(--primary)">SYSTEMS</span></a>
       <div class="links">
+        <a href="#productos">Proyectos</a>
         <a href="#historia">Historia</a>
         <a href="#metodo">Mi forma de trabajar</a>
-        <a href="#productos">Proyectos</a>
         <a href="#credo">Principios</a>
         <a href="#yo">Sobre mí</a>
       </div>
@@ -188,9 +193,9 @@
     <div class="container">
       <div class="hero-grid">
         <div>
-          <span class="badge">● He estado donde estás tú</span>
+          <span class="hero-role">Product Engineer · Full Stack Software Engineer</span>
           <h1>Construyo el software que siempre eché de menos cuando trabajaba en <span class="mark">producción</span>.</h1>
-          <p class="lead">Durante años trabajé en producción industrial. Vi cómo personas excelentes perdían tiempo con herramientas lentas, complejas o diseñadas por quienes nunca habían pisado una planta. Hoy construyo productos digitales que nacen exactamente de esos problemas.</p>
+          <p class="lead"><strong>Construyo productos completos desde el problema de negocio hasta el despliegue, con código abierto y decisiones documentadas.</strong> Durante años trabajé en producción industrial. Vi cómo personas excelentes perdían tiempo con herramientas lentas, complejas o diseñadas por quienes nunca habían pisado una planta. Hoy construyo productos digitales que nacen exactamente de esos problemas.</p>
           <div class="cta">
             <a href="#productos" class="btn btn-primary">Conoce mis proyectos</a>
             <a href="#historia" class="btn btn-outline">Mi historia</a>
@@ -212,35 +217,97 @@
           <span class="what-icon">🛠️</span>
           <span class="what-label">Product Engineer</span>
           <span class="what-desc">Diseño y construyo productos SaaS desde el problema hasta el deploy</span>
+          <span class="what-metric">5 productos · del problema al deploy</span>
         </div>
         <div class="what-item">
           <span class="what-icon">🏭</span>
           <span class="what-label">Software Industrial</span>
           <span class="what-desc">MES, trazabilidad, control de planta nacidos de la experiencia real en fábrica</span>
+          <span class="what-metric">8 años en producción industrial</span>
         </div>
         <div class="what-item">
           <span class="what-icon">🧩</span>
           <span class="what-label">SaaS Multi-tenant</span>
           <span class="what-desc">Arquitectura con aislamiento por RLS, cada cliente ve solo sus datos</span>
+          <span class="what-metric">RLS · RBAC · PostgreSQL</span>
         </div>
         <div class="what-item">
           <span class="what-icon">🤖</span>
           <span class="what-label">IA Aplicada</span>
           <span class="what-desc">LLMs, RAG, asistentes contextuales integrados en productos reales</span>
+          <span class="what-metric">RAG en 3 productos · asistentes contextuales</span>
         </div>
         <div class="what-item">
           <span class="what-icon">📡</span>
           <span class="what-label">Offline-First</span>
           <span class="what-desc">Sistemas que funcionan sin conexión y sincronizan al recuperar red</span>
+          <span class="what-metric">IndexedDB · cola de sincronización</span>
         </div>
         <div class="what-item">
           <span class="what-icon">📐</span>
           <span class="what-label">TDD + ADRs</span>
           <span class="what-desc">Tests antes del código, decisiones documentadas con alternativas evaluadas</span>
+          <span class="what-metric">390+ tests · 32 ADRs</span>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- SECCIÓN 4: LOS PRODUCTOS (evidencia antes que historia) -->
+  <section id="productos">
+    <div class="container">
+      <span class="section-label">Los productos</span>
+      <h2 class="section-title">Cada producto nace de un problema real</h2>
+      <div class="products">
+        <a class="product" href="https://www.kavanasystems.com/manufacturing/" target="_blank" rel="noopener">
+          <span class="tag">Industria</span>
+          <h3>Kavana Manufacturing</h3>
+          <p>MES offline-first: trazabilidad, tiempos de máquina y control de planta que funciona aunque se caiga el Wi-Fi.</p>
+          <p class="tech">NestJS · PostgreSQL · Redis · BullMQ · RLS · RAG · Offline-first</p>
+          <p class="metrics">17 módulos · 246 tests (229 API + 17 frontend) · 5 ADRs</p>
+          <div class="arrow">Ver proyecto →</div>
+        </a>
+        <a class="product" href="https://www.kavanasystems.com/warehouse/" target="_blank" rel="noopener">
+          <span class="tag">Servicios</span>
+          <h3>Kavana Warehouse</h3>
+          <p>WMS multi-centro para empresas de limpieza: consumos por centro, alertas de stock bajo y control de presupuesto con datos reales.</p>
+          <p class="tech">Express · Prisma · PostgreSQL · JWT · RAG</p>
+          <p class="metrics">45 endpoints · 60 tests · 5 ADRs</p>
+          <div class="arrow">Ver proyecto →</div>
+        </a>
+        <a class="product" href="https://www.kavanasystems.com/routeai/" target="_blank" rel="noopener">
+          <span class="tag">Logística</span>
+          <h3>Kavana RouteAI</h3>
+          <p>Optimización de rutas de reparto con algoritmo 2-opt propio. Planificación de paradas, geocodificación y mapa interactivo en tiempo real.</p>
+          <p class="tech">React · Node · 2-opt propio · OCR · firma digital · RAG</p>
+          <p class="metrics">50 tests · 7 ADRs</p>
+          <div class="arrow">Ver proyecto →</div>
+        </a>
+        <a class="product" href="https://www.kavanasystems.com/calculadora/" target="_blank" rel="noopener">
+          <span class="tag">Calculadora</span>
+          <h3>Calculadora Kavana</h3>
+          <p>PWA offline para calcular la eficiencia de producción industrial, pensada para el suelo de fábrica.</p>
+          <p class="tech">Vanilla JS · 0 dependencias · Service Worker</p>
+          <p class="metrics">34 tests · 9 ADRs</p>
+          <div class="arrow">Ver proyecto →</div>
+        </a>
+        <a class="product" href="https://www.kavanasystems.com/busroad/" target="_blank" rel="noopener">
+          <span class="tag">Transporte</span>
+          <h3>Kavana BusRoad</h3>
+          <p>Rutas seguras para autobuses y camiones: evita puentes bajos y calles estrechas aplicando las dimensiones reales del vehículo en Europa.</p>
+          <p class="tech">Vue 3 · FastAPI · OpenRouteService · Leaflet · Fly.io</p>
+          <p class="metrics">6 ADRs</p>
+          <div class="arrow">Ver proyecto →</div>
+        </a>
+        <a class="product" href="#contacto">
+          <span class="tag">Próximamente</span>
+          <h3>El siguiente</h3>
+          <p>Siempre hay un problema real esperando una herramienta. Si el tuyo encaja, puede ser el próximo.</p>
+          <div class="arrow">Hablémoslo →</div>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- SECCIÓN 2: ¿POR QUÉ EXISTE KAVANA? -->
   <section id="historia">
@@ -248,10 +315,9 @@
       <span class="section-label">Por qué existe Kavana</span>
       <h2 class="section-title">Empezó con una frustración, no con un plan de negocio</h2>
       <div class="prose">
-        <p>Hace años terminaba un turno de noche y llegaba a casa con la cabeza llena de ideas. Mientras otros veían procesos normales, yo veía <em>tiempo perdido</em>.</p>
-        <p>Veía operarios haciendo el mismo trabajo dos veces. Veía hojas en papel. Veía Excel infinitos. Veía decisiones que podían automatizarse y nadie las tocaba.</p>
+        <p>Hace años terminaba un turno de noche y llegaba a casa con la cabeza llena de ideas. Veía operarios haciendo el mismo trabajo dos veces. Veía hojas en papel. Veía Excel infinitos. Veía decisiones que podían automatizarse y nadie las tocaba.</p>
         <blockquote>Esperé durante mucho tiempo a que alguien construyera mejores herramientas. Al final decidí intentarlo yo.</blockquote>
-        <blockquote>Así nació Kavana. No como una empresa, sino como una forma de convertir problemas reales en productos digitales. Empecé a diseñar la solución trabajando a doble jornada: en la fábrica, con turnos rotativos, y luego en casa, construyendo el software por las noches.</blockquote>
+        <p>Así nació Kavana Systems: mi laboratorio de producto y software, donde diseño, construyo y despliego productos propios basados en problemas reales de industria y logística. Empecé a diseñar la solución trabajando a doble jornada: en la fábrica, con turnos rotativos, y luego en casa, construyendo el software por las noches.</p>
       </div>
     </div>
   </section>
@@ -286,52 +352,6 @@
     </div>
   </section>
 
-  <!-- SECCIÓN 4: LOS PRODUCTOS -->
-  <section id="productos">
-    <div class="container">
-      <span class="section-label">Los productos</span>
-      <h2 class="section-title">Cada producto nace de un problema real</h2>
-      <div class="products">
-        <a class="product" href="https://www.kavanasystems.com/manufacturing/" target="_blank" rel="noopener">
-          <span class="tag">Industria</span>
-          <h3>Kavana Manufacturing</h3>
-          <p>Una nueva forma de entender el software de fabricación: trazabilidad, tiempos de máquina y control de planta que funciona aunque se caiga el Wi-Fi.</p>
-          <div class="arrow">Ver proyecto →</div>
-        </a>
-        <a class="product" href="https://www.kavanasystems.com/warehouse/" target="_blank" rel="noopener">
-          <span class="tag">Servicios</span>
-          <h3>Kavana Warehouse</h3>
-          <p>Control de stock para empresas de limpieza con múltiples centros. Consumos por centro, alertas de stock bajo y control de presupuesto con datos reales.</p>
-          <div class="arrow">Ver proyecto →</div>
-        </a>
-        <a class="product" href="https://www.kavanasystems.com/routeai/" target="_blank" rel="noopener">
-          <span class="tag">Logística</span>
-          <h3>Kavana RouteAI</h3>
-          <p>Optimización de rutas de reparto con algoritmo 2-opt propio. Planificación de paradas, geocodificación y mapa interactivo en tiempo real.</p>
-          <div class="arrow">Ver proyecto →</div>
-        </a>
-        <a class="product" href="https://www.kavanasystems.com/calculadora/" target="_blank" rel="noopener">
-          <span class="tag">Calculadora</span>
-          <h3>Calculadora Kavana</h3>
-          <p>Una herramienta para calcular la eficiencia de producción industrial, pensada para el suelo de fábrica.</p>
-          <div class="arrow">Ver proyecto →</div>
-        </a>
-        <a class="product" href="https://www.kavanasystems.com/busroad/" target="_blank" rel="noopener">
-          <span class="tag">Transporte</span>
-          <h3>Kavana BusRoad</h3>
-          <p>Rutas seguras para autobuses y camiones: evita puentes bajos y calles estrechas aplicando las dimensiones reales del vehículo en Europa.</p>
-          <div class="arrow">Ver proyecto →</div>
-        </a>
-        <a class="product" href="#contacto">
-          <span class="tag">Próximamente</span>
-          <h3>El siguiente</h3>
-          <p>Siempre hay un problema real esperando una herramienta. Si el tuyo encaja, puede ser el próximo.</p>
-          <div class="arrow">Hablémoslo →</div>
-        </a>
-      </div>
-    </div>
-  </section>
-
   <!-- SECCIÓN 5: GRAN FRASE -->
   <section class="statement">
     <div class="container">
@@ -361,12 +381,9 @@
           <span class="section-label">Sobre mí</span>
           <h2 class="section-title">Soy Jorge</h2>
           <p>Durante años, hasta julio de 2026, trabajé en producción industrial.</p>
-          <p>No estudié informática.</p>
-          <p>Aprendí construyendo.</p>
-          <p>Lo que empezó siendo curiosidad acabó convirtiéndose en una forma de entender el software: observar un problema real, simplificarlo y convertirlo en una herramienta útil.</p>
-          <p>Desde entonces he creado tiendas online, aplicaciones móviles, herramientas para empresas y productos impulsados por inteligencia artificial.</p>
-          <p>No porque quisiera cambiar de profesión.</p>
-          <p>Sino porque nunca dejé de intentar resolver los problemas que veía a mi alrededor.</p>
+          <p>He diseñado y construido cinco productos de software para industria y logística: un MES offline-first, un WMS multi-centro, un optimizador de rutas con algoritmo propio, una calculadora de eficiencia y un planificador de rutas para vehículos pesados. Cada uno con código abierto, tests y decisiones documentadas.</p>
+          <p>No estudié informática en una universidad: aprendí construyendo. Lo que empezó siendo curiosidad acabó convirtiéndose en una forma de entender el software: observar un problema real, simplificarlo y convertirlo en una herramienta útil.</p>
+          <p>No empecé a programar buscando una nueva profesión. Empecé porque quería resolver problemas que conocía de primera mano. Con el tiempo, construir software se convirtió en mi profesión.</p>
           <p>Todo empezó con WordPress. Después llegaron el ecommerce, el dropshipping, una marca propia de ropa mediante print on demand, aplicaciones Android con App Inventor y, finalmente, los productos que hoy forman Kavana.</p>
           <p>Mi objetivo nunca ha sido escribir más código. Ha sido construir mejores herramientas.</p>
         </div>
